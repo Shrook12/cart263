@@ -1,58 +1,77 @@
 
+
+let counter = 0;
+
+let square = {
+    x: 30,
+    y: 30,
+    w: 25,
+    h: 25,
+    color: "orange"
+}
+
+let circle = {
+    radius: 100,
+    color: "white"
+}
+
+let ellipseAlpha;
+
 function setup() {
-    console.log("go")
+
     createCanvas(500, 500);
 
 }
 
 function draw() {
-
-
-}
-
-function drawRectangle() {
+    background("black");
+    diplaySquare();
+    diplayCircle();
 
 }
 
+function diplaySquare() {
 
+    push();
+    noStroke();
+    fill(square.color);
+    rect(square.x, square.y, square.w, square.h, 5);
+    pop();
 
+}
 
+function diplayCircle() {
+    push();
+    noStroke();
+    fill(circle.color);
 
-
-
-
-
-
-
-
-/*function draw() {
-    background(0);
-
-
-
-    let startColor = color(173, 216, 230);
-    let endColor = color(0, 0, 139)
-
-
-    let x = 0;
-    let xSize = 50;
-    let rectheight = height / 3;
-    let y = 0;
-
-    for (let x = 0; x < width; x += rectheight) {
-        let percent = x / width;
-        let c = lerpColor(startColor, endColor, percent);
-        fill(c);
-        noStroke();
-        rect(x, y, rectheight, width);
+    ellipse(width / 2, height / 2, circle.radius, circle.radius);
+    pop();
+}
+function checkCollision() {
+    if (mouseX > square.x &&
+        mouseX < square.x + square.w &&
+        mouseY > square.y &&
+        mouseY < square.y + square.h
+    ) {
+        counter++;
+        console.log(counter);
     }
+}
+function mousePressed() {
+    checkCollision();
+}
 
-    if (mouseX > x && mouseX < x + rectheight && mouseY > y && mouseY < y + width) {
-        fill(0);
-    }
 
 
-}*/
+
+
+
+
+
+
+
+
 
 
 
