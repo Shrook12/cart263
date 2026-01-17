@@ -2,6 +2,7 @@
 function setup() {
     console.log("go")
     createCanvas(500, 500);
+
 }
 
 function draw() {
@@ -9,15 +10,23 @@ function draw() {
     drawRectangle(0, 0, width / 3, height, "blue");
     drawRectangle(width / 3, 0, width / 3, height, "red");
     drawRectangle(width / 1.5, 0, width / 3, height, "black");
+
 }
 
 function drawRectangle(x, y, w, h, color) {
     push();
     noStroke();
-    fill(color);
+    if (mouseX > x && mouseX < x + w && mouseY > y && mouseY < y + h) {
+        fill("white");
+    } else {
+        fill(color);
+    }
+
     rect(x, y, w, h);
     pop();
 }
+
+
 
 
 
