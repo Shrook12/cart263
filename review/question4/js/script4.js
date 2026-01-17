@@ -5,7 +5,7 @@ function setup() {
 }
 
 function draw() {
-    background("green");
+
     drawRectangle(0, 0, width / 3, height, "blue");
     drawRectangle(width / 3, 0, width / 3, height, "red");
     drawRectangle(width / 1.5, 0, width / 3, height, "black");
@@ -26,13 +26,15 @@ function drawRectangle(x, y, w, h, color) {
 
 
 
+
+
 /*function draw() {
     background(0);
 
 
 
     let startColor = color(173, 216, 230);
-    let endColor = color(0, 0, 139);
+    let endColor = color(0, 0, 139)
 
 
     let x = 0;
