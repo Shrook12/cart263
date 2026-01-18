@@ -21,7 +21,7 @@ let circle = {
     color: "white"
 }
 
-let ellipseAlpha = false;
+
 
 function setup() {
 
