@@ -14,7 +14,7 @@ let square2 = {
     y: 30,
     w: 50,
     h: 50,
-    color: "orange"
+    color: "purple"
 }
 let circle = {
     radius: 100,
@@ -31,8 +31,7 @@ function setup() {
 
 function draw() {
     background("black");
-    displaySquare();
-    displaySquare2();
+
 
 
     let x = 0;
@@ -47,6 +46,9 @@ function draw() {
         x++;
     }
 
+    displaySquare();
+    displaySquare2();
+
 
 }
 
@@ -54,7 +56,15 @@ function displaySquare() {
 
     push();
     noStroke();
-    fill(square.color);
+    if (mouseX > square.x &&
+        mouseX < square.x + square.w &&
+        mouseY > square.y &&
+        mouseY < square.y + square.h
+    ) {
+        fill("#ffd580");
+    } else {
+        fill(square.color);
+    }
     rect(square.x, square.y, square.w, square.h, 5);
     pop();
 
@@ -65,8 +75,16 @@ function displaySquare2() {
 
     push();
     noStroke();
-    fill(square.color);
-    rect(square.x, square.y, square.w, square.h, 5);
+    if (mouseX > square2.x &&
+        mouseX < square2.x + square2.w &&
+        mouseY > square2.y &&
+        mouseY < square2.y + square2.h
+    ) {
+        fill("#DAB1DA");
+    } else {
+        fill(square2.color);
+    }
+    rect(square2.x, square2.y, square2.w, square2.h, 5);
     pop();
 
 }
@@ -91,9 +109,24 @@ function checkCollision() {
         console.log(counter);
     }
 }
+function checkCollision2() {
+    if (mouseX > square2.x &&
+        mouseX < square2.x + square2.w &&
+        mouseY > square2.y &&
+        mouseY < square2.y + square2.h
+    ) {
+        if (counter > 0) {
+            counter--;
+        }
+
+        console.log(counter);
+    }
+}
+
 
 function mousePressed() {
     checkCollision();
+    checkCollision2()
 }
 
 
