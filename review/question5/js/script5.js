@@ -5,17 +5,23 @@ let counter = 0;
 let square = {
     x: 30,
     y: 30,
-    w: 25,
-    h: 25,
+    w: 50,
+    h: 50,
     color: "orange"
 }
-
+let square2 = {
+    x: 100,
+    y: 30,
+    w: 50,
+    h: 50,
+    color: "orange"
+}
 let circle = {
     radius: 100,
     color: "white"
 }
 
-let ellipseAlpha;
+let ellipseAlpha = false;
 
 function setup() {
 
@@ -25,12 +31,26 @@ function setup() {
 
 function draw() {
     background("black");
-    diplaySquare();
-    diplayCircle();
+    displaySquare();
+    displaySquare2();
+
+
+    let x = 0;
+    let size = 100;
+    let ellipseAlpha = 20;
+    while (x < counter) {
+        fill(255, 255, 255, ellipseAlpha);
+        noStroke();
+        ellipse(width / 2, height / 2, size, size);
+        size += 100;
+        ellipseAlpha + 25;
+        x++;
+    }
+
 
 }
 
-function diplaySquare() {
+function displaySquare() {
 
     push();
     noStroke();
@@ -40,7 +60,17 @@ function diplaySquare() {
 
 }
 
-function diplayCircle() {
+
+function displaySquare2() {
+
+    push();
+    noStroke();
+    fill(square.color);
+    rect(square.x, square.y, square.w, square.h, 5);
+    pop();
+
+}
+function displayCircle() {
     push();
     noStroke();
     fill(circle.color);
@@ -54,10 +84,14 @@ function checkCollision() {
         mouseY > square.y &&
         mouseY < square.y + square.h
     ) {
-        counter++;
+        if (counter < 10) {
+            counter++;
+        }
+
         console.log(counter);
     }
 }
+
 function mousePressed() {
     checkCollision();
 }
