@@ -1,5 +1,6 @@
 
-let color = "blue"
+let circleColor = "blue";
+let circleSquare = 150;
 
 
 
@@ -16,23 +17,33 @@ function draw() {
 
 function drawgrid() {
 
-    for (let x = 0; x < 550; x += 50) {
-        for (let y = 0; y < 550; y += 50) {
-            fill(color);
+    for (let x = 0; x < 550; x += 52) {
+        for (let y = 0; y < 550; y += 52) {
+            fill(circleColor);
             noStroke();
-            ellipse(x, y, 50, 50);
+            rect(x, y, 50, 50, circleSquare);
         }
 
     }
 }
 
-color = "blue";
+
 function keyPressed() {
     if (keyCode === 32) {
-        let changeColor = color(random(255), random(255), random(255));
-        let color = changeColor;
+        circleColor = color(random(255), random(255), random(255));
+
     }
 }
+function mousePressed() {
+    if (circleSquare === 150) {
+        circleSquare = 0;
+    } else
+        if (circleSquare === 0) {
+            circleSquare = 150;
+        }
+}
+
+
 
 
 
