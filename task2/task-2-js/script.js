@@ -7,6 +7,8 @@ function setup() {
     /*** START PART ONE ACCESS */
     /* 1: all paragraph elements */
     /***CODE:  console.log(document.querySelectorAll("p"));*/
+    console.log(document.querySelectorAll("p"));
+
     /***OUTPUT:I used console.log to output this:
      *  NodeList(9)
 0: p#1
@@ -21,11 +23,14 @@ function setup() {
 length: 9
      * 
      */
-    console.log(document.querySelectorAll("p"));
+
 
     /*************************************** */
     /* 2: only the first paragraph element */
+
     /***CODE:     console.log(document.querySelector("p"));*/
+    console.log(document.querySelector("p"));
+
     /***OUTPUT: I used console.log to output this:
      * <p id="1">
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias perspiciatis blanditiis, et
@@ -36,13 +41,14 @@ length: 9
             
      * 
      */
-    console.log(document.querySelector("p"));
 
 
 
     /*************************************** */
     /* 3: all elements with the class inner-container */
     /***CODE     console.log(document.querySelectorAll("inner-container"));*/
+    console.log(document.querySelectorAll(".inner-container"));
+
     /***OUTPUT: used console.log to output:
      * 
 NodeList(8) [div.inner-container, div.inner-container, div.inner-container, div.inner-container, div.inner-container, div.inner-container, div.inner-container, div.inner-container]
@@ -58,10 +64,13 @@ length: 8
 [[Prototype]]: NodeList
      */
 
-    console.log(document.querySelectorAll(".inner-container"));
+
     /*************************************** */
     /* 4: the last image element inside the element that has the class img-container */
     /***CODE    console.log(document.querySelectorAll(".img-container")[7].children); */
+
+    console.log(document.querySelectorAll(".img-container")[7].children);
+
     /***OUTPUT: used console.log to output this:
      * HTMLCollection [img.img-image]
 0: img.img-image
@@ -69,7 +78,6 @@ length: 1
 [[Prototype]]: HTMLCollection
      * 
      */
-    console.log(document.querySelectorAll(".img-container")[7].children);
 
     /*************************************** */
     /* 5A: all h2 elements */
@@ -78,6 +86,11 @@ length: 1
     /***CODE     console.log(document.querySelectorAll("h2"));
     console.log(document.querySelectorAll("h2").length)
     console.log(document.querySelector("h2").textContent);*/
+
+    console.log(document.querySelectorAll("h2"));
+    console.log(document.querySelectorAll("h2").length)
+    console.log(document.querySelector("h2").textContent);
+
     /***OUTPUT:used console.log, querySelectorAll, querySelector,length,textContent to output
      * 
      * 5A:
@@ -96,14 +109,17 @@ length: 1
     
      */
 
-    console.log(document.querySelectorAll("h2"));
-    console.log(document.querySelectorAll("h2").length)
-    console.log(document.querySelector("h2").textContent);
+
     /*************************************** */
     /* 6: the element with id name parent */
     /***CODE  console.log(document.querySelectorAll("div")[1].parentElement);
     //or
               console.log(document.getElementById("parent"));*/
+
+    console.log(document.querySelectorAll("div")[1].parentElement);
+    //or
+    console.log(document.getElementById("parent"));
+
     /***OUTPUT:Used console.log, querySelectorAll, and parentElement to output:
      * 
      * <section id="parent">...</section>
@@ -111,13 +127,11 @@ length: 1
      * Can also use getElementById
      * 
      */
-    console.log(document.querySelectorAll("div")[1].parentElement);
-    //or
-    console.log(document.getElementById("parent"));
+
 
     /*************************************** */
     /*** END PART ONE ACCESS */
-    console.log(document.getElementById("1"))
+
 
     /*************************************** */
     /*** START PART TWO MODIFY */
@@ -127,16 +141,21 @@ length: 1
     document.getElementsByTagName("p")[0].textContent = "New text in paragraph one: text changed by `AN UNKNOWN PERSON` on the following date: `Sunday January 25 in year 30000`.";*/
     console.log(document.getElementById("1"));
     document.getElementsByTagName("p")[0].textContent = "New text in paragraph one: text changed by `AN UNKNOWN PERSON` on the following date: `Sunday January 25 in year 30000`.";
+
     /*************************************** */
     /* 2: Select all elements in the HTML that have the class name content-container
      and change the background color ... of first and second ...*/
     /***CODE      document.querySelectorAll(".content-container")[0].style.background = "orange";
     document.querySelectorAll(".content-container")[1].style.background = "purple";*/
+
     document.querySelectorAll(".content-container")[0].style.background = "orange";
     document.querySelectorAll(".content-container")[1].style.background = "purple";
+
     /*************************************** */
     /* 3: Change the src element of the first image element on the page to be ...
-    /***CODE */
+    /***CODE     document.querySelectorAll("img")[0].src = "./task-2-images/seven.png";*/
+
+    document.querySelectorAll("img")[0].src = "./task-2-images/seven.png";
 
     /*************************************** */
     /* 4: Select the third paragraph element on the page and
