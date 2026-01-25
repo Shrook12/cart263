@@ -123,14 +123,17 @@ length: 1
     /*** START PART TWO MODIFY */
     /*************************************** */
     /* 1: Select the first paragraph and replace the text within the paragraph... */
-    /***CODE */
+    /***CODE     console.log(document.getElementById("1"));
+    document.getElementsByTagName("p")[0].textContent = "New text in paragraph one: text changed by `AN UNKNOWN PERSON` on the following date: `Sunday January 25 in year 30000`.";*/
     console.log(document.getElementById("1"));
     document.getElementsByTagName("p")[0].textContent = "New text in paragraph one: text changed by `AN UNKNOWN PERSON` on the following date: `Sunday January 25 in year 30000`.";
     /*************************************** */
     /* 2: Select all elements in the HTML that have the class name content-container
      and change the background color ... of first and second ...*/
-    /***CODE */
-
+    /***CODE      document.querySelectorAll(".content-container")[0].style.background = "orange";
+    document.querySelectorAll(".content-container")[1].style.background = "purple";*/
+    document.querySelectorAll(".content-container")[0].style.background = "orange";
+    document.querySelectorAll(".content-container")[1].style.background = "purple";
     /*************************************** */
     /* 3: Change the src element of the first image element on the page to be ...
     /***CODE */
