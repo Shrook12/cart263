@@ -75,18 +75,45 @@ length: 1
     /* 5A: all h2 elements */
     /* 5B: length of the list in 5A */
     /* 5C: the text content of the first element in the list from 5A */
-    /***CODE */
-    /***OUTPUT: 
+    /***CODE     console.log(document.querySelectorAll("h2"));
+    console.log(document.querySelectorAll("h2").length)
+    console.log(document.querySelector("h2").textContent);*/
+    /***OUTPUT:used console.log, querySelectorAll, querySelector,length,textContent to output
      * 
+     * 5A:
+     * NodeList [h2]
+     * 0: h2
+     * length: 1
+     * [[Prototype]]: NodeList
+
+     * 5B:
+     *1
+     *
+     * 
+     * 5C
+     *  The header of this fancy page
+     * 
+    
      */
 
-
+    console.log(document.querySelectorAll("h2"));
+    console.log(document.querySelectorAll("h2").length)
+    console.log(document.querySelector("h2").textContent);
     /*************************************** */
     /* 6: the element with id name parent */
-    /***CODE */
-    /***OUTPUT: 
+    /***CODE  console.log(document.querySelectorAll("div")[1].parentElement);
+    //or
+              console.log(document.getElementById("parent"));*/
+    /***OUTPUT:Used console.log, querySelectorAll, and parentElement to output:
+     * 
+     * <section id="parent">...</section>
+     * 
+     * Can also use getElementById
      * 
      */
+    console.log(document.querySelectorAll("div")[1].parentElement);
+    //or
+    console.log(document.getElementById("parent"));
 
     /*************************************** */
     /*** END PART ONE ACCESS */
