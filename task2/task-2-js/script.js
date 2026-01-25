@@ -61,11 +61,15 @@ length: 8
     console.log(document.querySelectorAll(".inner-container"));
     /*************************************** */
     /* 4: the last image element inside the element that has the class img-container */
-    /***CODE */
-    /***OUTPUT: 
+    /***CODE    console.log(document.querySelectorAll(".img-container")[7].children); */
+    /***OUTPUT: used console.log to output this:
+     * HTMLCollection [img.img-image]
+0: img.img-image
+length: 1
+[[Prototype]]: HTMLCollection
      * 
      */
-
+    console.log(document.querySelectorAll(".img-container")[7].children);
 
     /*************************************** */
     /* 5A: all h2 elements */
