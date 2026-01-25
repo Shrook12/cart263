@@ -161,6 +161,7 @@ length: 1
     /* 4: Select the third paragraph element on the page and
     replace the content (within the paragraph) to be an h2 element which contains the text `TEST 123`
     /***CODE */
+    document.querySelectorAll(".content-container")[1].children[1].innerHTML = "<h2> TEST 123</h2>"
 
     /*************************************** */
     /* 5: Select the fourth paragraph element on the page and
