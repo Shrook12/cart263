@@ -329,11 +329,17 @@ length: 1
 
         }
     }
-
+    console.log(document.querySelectorAll(".testDiv"))
 
     /***EXPLANATION::
-     * 
-     * 
+     * I am not sure if I understand the question but I will
+     * try to what I understood.
+     *  
+     * There are a 100 div. So since we created a div element
+     * and give it a class name "testDiv" then we call it in
+     * the nested for loop which makes it call this function
+     * 100 hundred time because in the nested loop so the row
+     * run 10 times and the colums run 10 times.
      */
 
     /*************************************** */
