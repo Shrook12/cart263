@@ -413,7 +413,7 @@ length: 1
             returnedDiv.style.left = x + "px";
             returnedDiv.style.top = y + "px";
 
-            //returnedDiv.style.backgroundColor = colors[colorIndex];
+
             if (c % 3 === 0) {
                 returnedDiv.style.backgroundColor = "white";
                 returnedDiv.innerHTML = "0";
@@ -428,15 +428,17 @@ length: 1
 
 
         }
-        //colorIndex = 1 - colorIndex;
+
     }
-
-
-
     /***EXPLANATION::
-     * 
-     * 
-     */
+         * 
+         * So in this context modulus is used in c % 3 means that
+         * every three colum it turns white and because of the === 0
+         * it make it start at the first colum.
+         * And then for red I changed to ===1 because the red is every
+         * 3 colum and start at the second colum and after the orange
+         * is the rest.
+         */
 
     /*************************************** */
     /*** END PART THREE CREATE */
