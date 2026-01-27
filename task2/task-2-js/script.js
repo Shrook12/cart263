@@ -303,9 +303,7 @@ length: 1
 
     /***CODE
      *  
-
-    */
-    let parent = document.querySelector("#new-grid");
+ let parent = document.querySelector("#new-grid");
 
     function customNewBoxCreate(parent) {
 
@@ -330,6 +328,8 @@ length: 1
         }
     }
     console.log(document.querySelectorAll(".testDiv"))
+    */
+
 
     /***EXPLANATION::
      * I am not sure if I understand the question but I will
@@ -341,7 +341,41 @@ length: 1
      * 100 hundred time because in the nested loop so the row
      * run 10 times and the colums run 10 times.
      */
+    let parent = document.querySelector("#new-grid");
 
+    function customNewBoxCreate(parent) {
+
+        let testDiv = document.createElement("div");
+        testDiv.classList.add("testDiv");
+        parent.appendChild(testDiv);
+        return testDiv;
+
+    }
+    //let colorIndex = 0;
+    for (let r = 0; r < 10; r++) {
+        for (let c = 0; c < 10; c++) {
+            let returnedDiv = customNewBoxCreate(parent);
+
+            let x = c * 40;
+            let y = r * 40;
+
+
+            let colors = ["white", "blue"]
+            returnedDiv.style.left = x + "px";
+            returnedDiv.style.top = y + "px";
+
+            //returnedDiv.style.backgroundColor = colors[colorIndex];
+            if (r % 2 === 0) {
+                returnedDiv.style.backgroundColor = "white";
+            } else {
+                returnedDiv.style.backgroundColor = "blue";
+            }
+
+
+
+        }
+        //colorIndex = 1 - colorIndex;
+    }
     /*************************************** */
     /* 3: GRID OF BOXES II */
 
