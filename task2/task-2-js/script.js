@@ -187,6 +187,14 @@ length: 1
     a background using that color.
     /***CODE */
 
+
+    let colors = ["red", "blue", "green", "orange", "purple"];
+    let innerContainers = document.querySelectorAll(".inner-container");
+    innerContainers[0].style.backgroundColor = colors[0];
+    innerContainers[1].style.backgroundColor = colors[1];
+    innerContainers[2].style.backgroundColor = colors[2];
+    innerContainers[3].style.backgroundColor = colors[3];
+    innerContainers[4].style.backgroundColor = colors[4];
     /*************************************** */
     /*** END PART TWO MODIFY */
 
