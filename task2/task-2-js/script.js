@@ -306,10 +306,11 @@ length: 1
 
     */
     let parent = document.querySelector("#new-grid");
+
     function customNewBoxCreate(parent) {
 
         let testDiv = document.createElement("div");
-        testDiv.classList.add(".testDiv");
+        testDiv.classList.add("testDiv");
         parent.appendChild(testDiv);
         return testDiv;
 
@@ -319,14 +320,11 @@ length: 1
         for (let c = 0; c < 10; c++) {
             let returnedDiv = customNewBoxCreate(parent);
 
-            let x = c * 20;
-            let y = r * 50;
-            returnedDiv.style.position = "absolute";
+            let x = c * 40;
+            let y = r * 40;
+
             returnedDiv.style.left = x + "px";
-            returnedDiv.style.right = y + "px";
-            //returnedDiv.style.backgroundColor = "blue";
-            //returnedDiv.style.width = "40px";
-            //returnedDiv.style.height = "40px";
+            returnedDiv.style.top = y + "px";
 
 
         }
