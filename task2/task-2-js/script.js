@@ -399,7 +399,7 @@ length: 1
         when dividing by three. */
 
     /***CODE */
-
+    //I think something is missing because it's not placed in the second grid
     let parent2 = document.querySelector("#new-grid-three");
     for (let r = 0; r < 10; r++) {
         for (let c = 0; c < 10; c++) {
