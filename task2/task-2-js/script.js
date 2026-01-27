@@ -261,6 +261,13 @@ length: 1
     // customCreateElement(allPTagsThree[8]);
     allPTagsThree.forEach(customCreateElement); //a lot more easier!
 
+
+
+    ///// not sure how I can do it this way
+    /*for (let singlePTagThree of allPTagsThree) {
+        singlePTagThree(customCreateElement)
+    }*/
+
     /***EXPLANATION::
      * From what I understood from doing this and from seeing
      * the result is that the code adds a new paragraph inside
@@ -294,7 +301,36 @@ length: 1
     /* 2H: BONUS II: For every div in an even numbered row make it contain the text `EVEN`, 
         otherwise lat it have the content `ODD`.*/
 
-    /***CODE */
+    /***CODE
+     *  
+
+    */
+    let parent = document.querySelector("#new-grid");
+    function customNewBoxCreate(parent) {
+
+        let testDiv = document.createElement("div");
+        testDiv.classList.add(".testDiv");
+        parent.appendChild(testDiv);
+        return testDiv;
+
+    }
+
+    for (let r = 0; r < 10; r++) {
+        for (let c = 0; c < 10; c++) {
+            let returnedDiv = customNewBoxCreate(parent);
+
+            let x = c * 20;
+            let y = r * 50;
+            returnedDiv.style.position = "absolute";
+            returnedDiv.style.left = x + "px";
+            returnedDiv.style.right = y + "px";
+            //returnedDiv.style.backgroundColor = "blue";
+            //returnedDiv.style.width = "40px";
+            //returnedDiv.style.height = "40px";
+
+
+        }
+    }
 
 
     /***EXPLANATION::
