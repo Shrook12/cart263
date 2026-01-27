@@ -341,34 +341,42 @@ length: 1
      * 100 hundred time because in the nested loop so the row
      * run 10 times and the colums run 10 times.
      */
-    let parent = document.querySelector("#new-grid");
+    let parent1 = document.querySelector("#new-grid");
+
 
     function customNewBoxCreate(parent) {
 
         let testDiv = document.createElement("div");
         testDiv.classList.add("testDiv");
-        parent.appendChild(testDiv);
+        parent1.appendChild(testDiv);
+
+
         return testDiv;
 
     }
     //let colorIndex = 0;
+
+
     for (let r = 0; r < 10; r++) {
         for (let c = 0; c < 10; c++) {
+
             let returnedDiv = customNewBoxCreate(parent);
 
             let x = c * 40;
             let y = r * 40;
 
 
-            let colors = ["white", "blue"]
+            //let colors = ["white", "blue"]
             returnedDiv.style.left = x + "px";
             returnedDiv.style.top = y + "px";
 
             //returnedDiv.style.backgroundColor = colors[colorIndex];
             if (r % 2 === 0) {
                 returnedDiv.style.backgroundColor = "white";
+                returnedDiv.innerHTML = "EVEN";
             } else {
-                returnedDiv.style.backgroundColor = "blue";
+                returnedDiv.style.backgroundColor = " cornflowerblue";
+                returnedDiv.innerHTML = "ODD";
             }
 
 
@@ -391,6 +399,38 @@ length: 1
         when dividing by three. */
 
     /***CODE */
+
+    let parent2 = document.querySelector("#new-grid-three");
+    for (let r = 0; r < 10; r++) {
+        for (let c = 0; c < 10; c++) {
+            let returnedDiv = customNewBoxCreate(parent2);
+
+            let x = c * 40 + 500;
+            let y = r * 40;
+
+
+
+            returnedDiv.style.left = x + "px";
+            returnedDiv.style.top = y + "px";
+
+            //returnedDiv.style.backgroundColor = colors[colorIndex];
+            if (c % 3 === 0) {
+                returnedDiv.style.backgroundColor = "white";
+                returnedDiv.innerHTML = "0";
+            } else if (c % 3 === 1) {
+                returnedDiv.style.backgroundColor = " red";
+                returnedDiv.innerHTML = "1";
+            } else {
+                returnedDiv.style.backgroundColor = " orange";
+                returnedDiv.innerHTML = "2";
+            }
+
+
+
+        }
+        //colorIndex = 1 - colorIndex;
+    }
+
 
 
     /***EXPLANATION::
