@@ -239,6 +239,7 @@ length: 1
     /* 1H: Iterate through the allPTagsThree array and call customCreateElement(),
     passing the current allPTagsThree element as the parent with each iteration.*/
     /***CODE */
+    let allPTagsThree = document.querySelectorAll("p");
     function customCreateElement(parent) {
 
         let newParagraph = document.createElement("p");
@@ -248,7 +249,7 @@ length: 1
 
         parent.appendChild(newParagraph);
     }
-    let allPTagsThree = document.querySelectorAll("p");
+
 
     // customCreateElement(allPTagsThree[0]);
     //customCreateElement(allPTagsThree[1]);
@@ -264,9 +265,14 @@ length: 1
 
 
     ///// not sure how I can do it this way
+    //for(let pTag of allpTagsThree)
     /*for (let singlePTagThree of allPTagsThree) {
         singlePTagThree(customCreateElement)
     }*/
+    /////in class
+    /*
+    for(let i=0;i<allPTagsThree.length;i++){
+    customCreateElement(allPTagsThree)}
 
     /***EXPLANATION::
      * From what I understood from doing this and from seeing
@@ -351,7 +357,7 @@ length: 1
         parent1.appendChild(testDiv);
 
 
-        return testDiv;
+        return testDiv;//make it accessible when it's outside
 
     }
     //let colorIndex = 0;
