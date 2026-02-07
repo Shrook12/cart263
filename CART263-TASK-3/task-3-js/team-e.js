@@ -122,9 +122,35 @@ function setup_E() {
     let arrayOfellipses = [];
 
     let stars = 25;
-    let speed = 1000;
+    let starsCount = 0;
+    let speed = 100;
     //make mutiple lines
-    for (let i = 0; i < stars; i++) {
+    /*   function addCircles() {
+        for (let i = 0; i < stars; i++) {
+          let ellipse = document.createElement("div");
+          parentCanvas.appendChild(ellipse);
+          ellipse.style.position = "absolute";
+          ellipse.style.left = `${Math.random() * (window.innerWidth - 200)}px`;
+          ellipse.style.top = `${Math.random() * (window.innerWidth - 200)}px`;
+          ellipse.style.width = "10px";
+          ellipse.style.height = "10px";
+          ellipse.style.opacity = 1;
+          ellipse.style.background = sampleColors[parseInt(Math.random() * sampleColors.length)];
+          ellipse.style.borderRadius = "50%";
+          if (speed > 200) {
+            speed -= 20;
+          }
+  
+          setTimeout(addCircles, speed);
+  
+        }
+      }
+      addCircles(); */
+
+    function addCircles() {
+
+      if (starsCount === stars) return;
+
       let ellipse = document.createElement("div");
       parentCanvas.appendChild(ellipse);
       ellipse.style.position = "absolute";
@@ -135,11 +161,16 @@ function setup_E() {
       ellipse.style.opacity = 1;
       ellipse.style.background = sampleColors[parseInt(Math.random() * sampleColors.length)];
       ellipse.style.borderRadius = "50%";
+      starsCount++;
+      if (speed > 200) {
+        speed -= 20;
+      }
 
-
+      setTimeout(addCircles, speed);
 
     }
 
+    addCircles();
   }
 
 }
