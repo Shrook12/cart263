@@ -209,21 +209,25 @@ function setup_E() {
    addCircles();
  } */
     let boundingBoxParent = parentCanvas.getBoundingClientRect();
-    let size = 50;
+    let size = 7;
     // I am going to try something else
     for (let row = 0; row < size; row++) {
       for (let col = 0; col < size; col++) {
         let square = document.createElement("div");
 
-        square.style.width = "50px";
-        square.style.height = "50px";
+        square.style.left = col * 52 + "px";
+        square.style.top = row * 52 + "px";
+        square.style.width = "60px";
+        square.style.height = "60px";
+        square.style.position = "absolute";
 
-
-        if ((row + col) % 2 === 0) {
-          square.style.backgroundColor = "white";
-        } else {
-          square.style.backgroundColor = "black";
-        }
+        square.style.backgroundColor =
+          (row + col) % 2 === 0 ? "white" : "black";
+        /*   if ((row + col) % 2 === 0) {
+            square.style.backgroundColor = "white";
+          } else {
+            square.style.backgroundColor = "black";
+          } */
 
         parentCanvas.appendChild(square);
       }
