@@ -210,6 +210,7 @@ function setup_E() {
  } */
     let boundingBoxParent = parentCanvas.getBoundingClientRect();
     let size = 7;
+    let squareS = 60;
     // I am going to try something else
     for (let row = 0; row < size; row++) {
       for (let col = 0; col < size; col++) {
@@ -217,8 +218,8 @@ function setup_E() {
 
         square.style.left = col * 52 + "px";
         square.style.top = row * 52 + "px";
-        square.style.width = "60px";
-        square.style.height = "60px";
+        square.style.width = squareS + "px";
+        square.style.height = squareS + "px";
         square.style.position = "absolute";
 
         square.style.backgroundColor =
@@ -233,8 +234,24 @@ function setup_E() {
       }
 
     }
+    let ellipseS = 30;
     let circles = [];
 
+
+    function addCircles(row, col) {
+      let ellipse = document.createElement("div");
+
+      ellipse.style.position = "absolute";
+      ellipse.style.width = ellipseS + "px";
+      ellipse.style.height = ellipseS + "px";
+      ellipse.style.borderRadius = "50%";
+      ellipse.style.backgroundColor = "purple";
+
+      ellipse.style.left = col * squareS + "px";
+      ellipse.style.top = row * squareS + "px";
+      parentCanvas.appendChild(ellipse);
+    }
+    addCircles();
   }
 
 }
