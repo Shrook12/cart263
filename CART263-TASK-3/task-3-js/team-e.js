@@ -118,10 +118,9 @@ function setup_E() {
     ];
 
     //get bound
-    let boundingBoxParent = parentCanvas.getBoundingClientRect();
-    let arrayOfellipses = [];
+    // let boundingBoxParent = parentCanvas.getBoundingClientRect();
 
-    let stars = 25;
+    /* let stars = 25;
     let starsCount = 0;
     let speed = 100;
     //make mutiple lines
@@ -147,30 +146,89 @@ function setup_E() {
       }
       addCircles(); */
 
-    function addCircles() {
+    /* function addCircles() {
+ 
+       //if (starsCount === stars) return;
+ 
+       let ellipse = document.createElement("div");
+       parentCanvas.appendChild(ellipse);
+       ellipse.style.position = "absolute";
+ 
+       let boundingBoxParent = parentCanvas.getBoundingClientRect();
+       ellipse.style.left = `${Math.random() * (boundingBoxParent.width - 10)}px`;
+       ellipse.style.top = `${Math.random() * (boundingBoxParent.height - 10)}px`;
+       ellipse.style.width = "10px";
+       ellipse.style.height = "10px";
+       ellipse.style.opacity = 1;
+       ellipse.style.background = sampleColors[parseInt(Math.random() * sampleColors.length)];
+       ellipse.style.borderRadius = "50%";
+ 
+       // let circleSpeed = Math.random() < 0.5 ? 1 : -1;//move right or left
+       let speedX = Math.random() < 0.5 ? 2 : -2;
+ 
+       function animate() {
+         ellipse.style.left = parseInt(ellipse.style.left) + speedX + "px";
+ 
+ 
+ 
+         window.requestAnimationFrame(animate);
+         // checkBounds(document.getElementById("parent"), ellipse)
+ 
+         /*       if (ellipse.style.left === 0) {
+                 ellipse.style.left = 0;
+                 speedX *= -1;
+       
+               } else if (ellipse.style.left + 10 >= boundingBoxParent) {
+                 ellipse.style.left = boundingBoxParent.width - 10;
+                 speedX *= -1;
+               } */
+    /*  }
+      animate();
 
-      if (starsCount === stars) return;
 
-      let ellipse = document.createElement("div");
-      parentCanvas.appendChild(ellipse);
-      ellipse.style.position = "absolute";
-      ellipse.style.left = `${Math.random() * (window.innerWidth - 200)}px`;
-      ellipse.style.top = `${Math.random() * (window.innerWidth - 200)}px`;
-      ellipse.style.width = "10px";
-      ellipse.style.height = "10px";
-      ellipse.style.opacity = 1;
-      ellipse.style.background = sampleColors[parseInt(Math.random() * sampleColors.length)];
-      ellipse.style.borderRadius = "50%";
-      starsCount++;
+      //starsCount++;
       if (speed > 200) {
         speed -= 20;
       }
 
-      setTimeout(addCircles, speed);
+      /*       function checkBounds(parent, ellipse) {
+              let bounds = parent.getBoundingClientRect();
+      
+              if (parseInt(ellipse.style.left) > bounds.right) {
+                speedX *= -1;
+              } else if (parseInt(ellipse.style.left) < bounds.left) {
+                speedX *= -1;
+              } */
+
+    //}
+
+    /* setTimeout(addCircles, speed);
+
+   }
+
+   addCircles();
+ } */
+    let boundingBoxParent = parentCanvas.getBoundingClientRect();
+    let size = 50;
+    // I am going to try something else
+    for (let row = 0; row < size; row++) {
+      for (let col = 0; col < size; col++) {
+        let square = document.createElement("div");
+
+        square.style.width = "50px";
+        square.style.height = "50px";
+
+
+        if ((row + col) % 2 === 0) {
+          square.style.backgroundColor = "white";
+        } else {
+          square.style.backgroundColor = "black";
+        }
+
+        parentCanvas.appendChild(square);
+      }
 
     }
-
-    addCircles();
   }
 
 }
