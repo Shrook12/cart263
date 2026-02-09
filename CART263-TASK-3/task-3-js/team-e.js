@@ -211,9 +211,12 @@ function setup_E() {
     let boundingBoxParent = parentCanvas.getBoundingClientRect();
     let size = 7;
     let squareS = 60;
+
+
+
     // I am going to try something else
-    for (let row = 0; row < size; row++) {
-      for (let col = 0; col < size; col++) {
+    for (let row = 0; row < 1; row++) {
+      for (let col = 0; col < 1; col++) {
         let square = document.createElement("div");
 
         square.style.left = col * 52 + "px";
@@ -236,6 +239,7 @@ function setup_E() {
     }
     let ellipseS = 35;
     let circles = [];
+    let images = ["image1.png", "image2.png", "image3.png"];
 
 
     function addCircles(row, col) {
@@ -244,16 +248,23 @@ function setup_E() {
       ellipse.style.position = "absolute";
       ellipse.style.width = ellipseS + "px";
       ellipse.style.height = ellipseS + "px";
-      ellipse.style.borderRadius = "50%";
-      ellipse.style.backgroundColor = "purple";
+      //ellipse.style.borderRadius = "50%";
+      // ellipse.style.backgroundColor = "purple";
 
+      // to pick random images
+      ellipse.style.background = `url(${images[parseInt(Math.random() * images.length)]})`;
+      ellipse.style.backgroundSize = "cover";
+      ellipse.style.backgroundPosition = "center";
+      ellipse.style.backgroundRepeat = "no-repeat";
 
       ellipse.style.left = col * 55 + (squareS - ellipseS) / 2 + "px";
       ellipse.style.top = row * 55 + (squareS - ellipseS) / 2 + "px";
       ellipse.style.transform = "translate(-50%,-50%)";
+      ellipse.setAttribute("move", "true")
 
       ellipse.row = row;
       ellipse.col = col;
+      console.log(ellipse.col)
 
       parentCanvas.appendChild(ellipse);
 
@@ -261,36 +272,80 @@ function setup_E() {
     }
 
 
-    for (let row = 0.1; row < size; row++) {
-      for (let col = 0.1; col < size; col++) {
-        if (Math.random() < 0.9) {
-          circles.push(addCircles(row, col));
-        }
+    for (let row = 0; row < 1; row++) {
+      for (let col = 0; col < 1; col++) {
+        // if (Math.random() < 0.9) {
+        circles.push(addCircles(row, col));
+        //}
       }
     }
 
     function animate() {
 
-      for (let i = 0; i < circles.length; i++) {
+      for (let i = 0; i < 1; i++) {
+
+
+
         let ellipse = circles[i];
+        if (ellipse.getAttribute("move") === "true") {
 
-        let move = [-1, 1, 0, 0];
+          console.log("here")
+          let move = [-1, 1, 0];
+          console.log(move)
 
-        let rowMove = move[parseInt(Math.random() * move.length)];
-        let colMove = move[parseInt(Math.random() * move.length)];
+          // let rowMove = move[parseInt(Math.random() * move.length)];
+          let colMove = move[parseInt(Math.random() * move.length)];
 
-        //new position
-        let newRow = ellipse.row + rowMove;
-        let newCol = ellipse.col + colMove;
+          //stay inside grid
+          //if (newRow >= 0 && newRow < size) { ellipse.row = newRow; }
+          if (parseFloat(ellipse.style.left) === 12.5 && colMove === -1) {
+            colMove = 1;
 
-        //stay inside grid
-        if (newRow >= 0 && newRow < size) { ellipse.row = newRow; }
-        if (newCol >= 0 && newCol < size) { ellipse.col = newCol; }
+          }
+          else if (parseFloat(ellipse.style.left) === 12.5 + (55 * 7) && colMove === 1) {
+            colMove = -1;
 
-        ellipse.style.left = ellipse.col * 55 + 15 + "px";
-        ellipse.style.top = ellipse.row * 55 + 15 + "px";
+          }
+
+          let newPosition = parseFloat(ellipse.style.left) + colMove * 55;
+          ellipse.setAttribute("colMove", colMove);
+          ellipse.setAttribute("newPosition", newPosition);
+
+          //new position
+          // let newRow = ellipse.row + rowMove;
+          //let newCol = ellipse.col + colMove;
+          ellipse.setAttribute("move", "moving")
+        }
+
+
+        if (ellipse.getAttribute("move") === "moving") {
+
+          let colMove = parseInt(ellipse.getAttribute("colMove"));
+          let newPosition = parseFloat(ellipse.getAttribute("newPosition"));
+
+
+          if (colMove !== 0) {
+            console.log(colMove)
+
+            ellipse.style.left = parseFloat(ellipse.style.left) + (1 * colMove) + "px";
+            console.log(ellipse.style.left)
+          }
+
+
+          if (parseFloat(ellipse.style.left) === parseFloat(newPosition)) {
+            console.log("stop")
+            ellipse.setAttribute("move", "false")
+
+            setTimeout(function () {
+              ellipse.setAttribute("move", "true")
+            }, 500)
+          }
+
+          console.log(ellipse.style.left)
+          // ellipse.style.top = ellipse.row * 55 + 15 + "px";
+        }
       }
-      setTimeout(animate, 500);
+      requestAnimationFrame(animate);
     }
     requestAnimationFrame(animate);
   }
