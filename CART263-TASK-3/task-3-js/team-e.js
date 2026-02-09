@@ -234,7 +234,7 @@ function setup_E() {
       }
 
     }
-    let ellipseS = 30;
+    let ellipseS = 35;
     let circles = [];
 
 
@@ -247,11 +247,23 @@ function setup_E() {
       ellipse.style.borderRadius = "50%";
       ellipse.style.backgroundColor = "purple";
 
-      ellipse.style.left = col * squareS + "px";
-      ellipse.style.top = row * squareS + "px";
+
+      ellipse.style.left = col * 55 + (squareS - ellipseS) / 2 + "px";
+      ellipse.style.top = row * 55 + (squareS - ellipseS) / 2 + "px";
+      ellipse.style.transform = "translate(-50%,-50%)";
       parentCanvas.appendChild(ellipse);
+
+      return ellipse;
     }
-    addCircles();
+
+
+    for (let row = 0.1; row < size; row++) {
+      for (let col = 0.1; col < size; col++) {
+        if (Math.random() < 0.9) {
+          circles.push(addCircles(row, col));
+        }
+      }
+    }
   }
 
 }
