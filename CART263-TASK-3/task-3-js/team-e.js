@@ -215,8 +215,8 @@ function setup_E() {
 
 
     // I am going to try something else
-    for (let row = 0; row < 1; row++) {
-      for (let col = 0; col < 1; col++) {
+    for (let row = 0; row < size; row++) {
+      for (let col = 0; col < size; col++) {
         let square = document.createElement("div");
 
         square.style.left = col * 52 + "px";
@@ -272,8 +272,8 @@ function setup_E() {
     }
 
 
-    for (let row = 0; row < 1; row++) {
-      for (let col = 0; col < 1; col++) {
+    for (let row = 0; row < size; row++) {
+      for (let col = 0; col < size; col++) {
         // if (Math.random() < 0.9) {
         circles.push(addCircles(row, col));
         //}
@@ -282,7 +282,7 @@ function setup_E() {
 
     function animate() {
 
-      for (let i = 0; i < 1; i++) {
+      for (let i = 0; i < circles.length; i++) {
 
 
 
@@ -293,11 +293,12 @@ function setup_E() {
           let move = [-1, 1, 0];
           console.log(move)
 
-          // let rowMove = move[parseInt(Math.random() * move.length)];
+          let rowMove = move[parseInt(Math.random() * move.length)];
           let colMove = move[parseInt(Math.random() * move.length)];
 
           //stay inside grid
           //if (newRow >= 0 && newRow < size) { ellipse.row = newRow; }
+
           if (parseFloat(ellipse.style.left) === 12.5 && colMove === -1) {
             colMove = 1;
 
@@ -307,9 +308,22 @@ function setup_E() {
 
           }
 
+          if (parseFloat(ellipse.style.top) === 12.5 && rowMove === -1) {
+            rowMove = 1;
+
+          }
+          else if (parseFloat(ellipse.style.top) === 12.5 + (55 * 7) && rowMove === 1) {
+            colMove = -1;
+
+          }
+
           let newPosition = parseFloat(ellipse.style.left) + colMove * 55;
+          let newPositionRow = parseFloat(ellipse.style.top) + rowMove * 55;
           ellipse.setAttribute("colMove", colMove);
+          ellipse.setAttribute("rowMove", rowMove);
           ellipse.setAttribute("newPosition", newPosition);
+          ellipse.setAttribute("newPositionRow", newPositionRow);
+
 
           //new position
           // let newRow = ellipse.row + rowMove;
@@ -321,8 +335,9 @@ function setup_E() {
         if (ellipse.getAttribute("move") === "moving") {
 
           let colMove = parseInt(ellipse.getAttribute("colMove"));
+          let rowMove = parseInt(ellipse.getAttribute("rowMove"));
           let newPosition = parseFloat(ellipse.getAttribute("newPosition"));
-
+          let newPositionRow = parseFloat(ellipse.getAttribute("newPositionRow"));
 
           if (colMove !== 0) {
             console.log(colMove)
@@ -331,8 +346,22 @@ function setup_E() {
             console.log(ellipse.style.left)
           }
 
+          if (rowMove !== 0) {
+            console.log(rowMove)
+
+            ellipse.style.top = parseFloat(ellipse.style.top) + (1 * rowMove) + "px";
+            console.log(ellipse.style.top)
+          }
 
           if (parseFloat(ellipse.style.left) === parseFloat(newPosition)) {
+            console.log("stop")
+            ellipse.setAttribute("move", "false")
+
+            setTimeout(function () {
+              ellipse.setAttribute("move", "true")
+            }, 500)
+          }
+          if (parseFloat(ellipse.style.top) === parseFloat(newPositionRow)) {
             console.log("stop")
             ellipse.setAttribute("move", "false")
 
