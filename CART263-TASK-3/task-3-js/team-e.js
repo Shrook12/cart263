@@ -251,6 +251,10 @@ function setup_E() {
       ellipse.style.left = col * 55 + (squareS - ellipseS) / 2 + "px";
       ellipse.style.top = row * 55 + (squareS - ellipseS) / 2 + "px";
       ellipse.style.transform = "translate(-50%,-50%)";
+
+      ellipse.row = row;
+      ellipse.col = col;
+
       parentCanvas.appendChild(ellipse);
 
       return ellipse;
@@ -264,6 +268,31 @@ function setup_E() {
         }
       }
     }
+
+    function animate() {
+
+      for (let i = 0; i < circles.length; i++) {
+        let ellipse = circles[i];
+
+        let move = [-1, 1, 0, 0];
+
+        let rowMove = move[parseInt(Math.random() * move.length)];
+        let colMove = move[parseInt(Math.random() * move.length)];
+
+        //new position
+        let newRow = ellipse.row + rowMove;
+        let newCol = ellipse.col + colMove;
+
+        //stay inside grid
+        if (newRow >= 0 && newRow < size) { ellipse.row = newRow; }
+        if (newCol >= 0 && newCol < size) { ellipse.col = newCol; }
+
+        ellipse.style.left = ellipse.col * 55 + 15 + "px";
+        ellipse.style.top = ellipse.row * 55 + 15 + "px";
+      }
+      setTimeout(animate, 500);
+    }
+    requestAnimationFrame(animate);
   }
 
 }
