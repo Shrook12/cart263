@@ -233,6 +233,8 @@ function setup_E() {
       }
 
     }
+    let circles = [];
+
   }
 
 }
