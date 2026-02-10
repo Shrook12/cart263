@@ -215,16 +215,23 @@ function setup_E() {
 
 
     // I am going to try something else
+
+    //this is for making a background of a chess board
+    //a grid of squares
     for (let row = 0; row < size; row++) {
       for (let col = 0; col < size; col++) {
+
+        //create divs for the squares
         let square = document.createElement("div");
 
+        //charactersitcs for the squares
         square.style.left = col * 52 + "px";
         square.style.top = row * 52 + "px";
         square.style.width = squareS + "px";
         square.style.height = squareS + "px";
         square.style.position = "absolute";
 
+        //make it white and black
         square.style.backgroundColor =
           (row + col) % 2 === 0 ? "white" : "black";
         /*   if ((row + col) % 2 === 0) {
@@ -232,7 +239,7 @@ function setup_E() {
           } else {
             square.style.backgroundColor = "black";
           } */
-
+        //append it to parent
         parentCanvas.appendChild(square);
       }
 
@@ -241,37 +248,39 @@ function setup_E() {
     let circles = [];
     let images = ["image1.png", "image2.png", "image3.png"];
 
-
+    //for circles/images
     function addCircles(row, col) {
-      let ellipse = document.createElement("div");
-
-      ellipse.style.position = "absolute";
-      ellipse.style.width = ellipseS + "px";
-      ellipse.style.height = ellipseS + "px";
+      //create divs for the images
+      let pawn = document.createElement("div");
+      //characteristicsfor the images
+      pawn.style.position = "absolute";
+      pawn.style.width = 50 + "px";
+      pawn.style.height = 50 + "px";
       //ellipse.style.borderRadius = "50%";
       // ellipse.style.backgroundColor = "purple";
 
       // to pick random images
-      ellipse.style.background = `url(${images[parseInt(Math.random() * images.length)]})`;
-      ellipse.style.backgroundSize = "cover";
-      ellipse.style.backgroundPosition = "center";
-      ellipse.style.backgroundRepeat = "no-repeat";
+      pawn.style.background = `url(${images[parseInt(Math.random() * images.length)]})`;
+      pawn.style.backgroundSize = "cover";
+      pawn.style.backgroundPosition = "center";
+      pawn.style.backgroundRepeat = "no-repeat";
 
-      ellipse.style.left = col * 55 + (squareS - ellipseS) / 2 + "px";
-      ellipse.style.top = row * 55 + (squareS - ellipseS) / 2 + "px";
-      ellipse.style.transform = "translate(-50%,-50%)";
-      ellipse.setAttribute("move", "true")
+      pawn.style.left = col * 57 + (squareS - ellipseS) / 2 + "px";
+      pawn.style.top = row * 57 + (squareS - ellipseS) / 2 + "px";
+      pawn.style.transform = "translate(-50%,-50%)";
+      pawn.setAttribute("move", "true")
 
-      ellipse.row = row;
-      ellipse.col = col;
-      console.log(ellipse.col)
+      pawn.row = row;
+      pawn.col = col;
+      console.log(pawn.col)
 
-      parentCanvas.appendChild(ellipse);
+      //append it to parents
+      parentCanvas.appendChild(pawn);
 
-      return ellipse;
+      return pawn;
     }
 
-
+    //call the function addCircles and create multiple of it
     for (let row = 0; row < size; row++) {
       for (let col = 0; col < size; col++) {
         // if (Math.random() < 0.9) {
@@ -280,103 +289,144 @@ function setup_E() {
       }
     }
 
+    //do animation  of moving pawns from square to square
     function animate() {
 
+      //to put the animation for all pawns
       for (let i = 0; i < circles.length; i++) {
 
 
 
-        let ellipse = circles[i];
-        if (ellipse.getAttribute("move") === "true") {
+        let pawn = circles[i];
+
+        //if the pawns move it become true
+        if (pawn.getAttribute("move") === "true") {
 
           console.log("here")
+          //steps
           let move = [-1, 1, 0];
           console.log(move)
 
+          //moving for the pawns using -1,1 or 0
           let rowMove = move[parseInt(Math.random() * move.length)];
           let colMove = move[parseInt(Math.random() * move.length)];
 
           //stay inside grid
           //if (newRow >= 0 && newRow < size) { ellipse.row = newRow; }
 
-          if (parseFloat(ellipse.style.left) === 12.5 && colMove === -1) {
+
+          // put limits to where the pawns can go with random numbers after multiple tries and console log
+          if (parseFloat(pawn.style.left) < 60 && colMove === -1) {
             colMove = 1;
 
           }
-          else if (parseFloat(ellipse.style.left) === 12.5 + (55 * 7) && colMove === 1) {
+          else if (parseFloat(pawn.style.left) > 295 && colMove === 1) {
             colMove = -1;
 
           }
 
-          if (parseFloat(ellipse.style.top) === 12.5 && rowMove === -1) {
+          if (parseFloat(pawn.style.top) < 60 && rowMove === -1) {
             rowMove = 1;
 
           }
-          else if (parseFloat(ellipse.style.top) === 12.5 + (55 * 7) && rowMove === 1) {
-            colMove = -1;
+          else if (parseFloat(pawn.style.top) > 295 && rowMove === 1) {
+            rowMove = -1;
 
           }
 
-          let newPosition = parseFloat(ellipse.style.left) + colMove * 55;
-          let newPositionRow = parseFloat(ellipse.style.top) + rowMove * 55;
-          ellipse.setAttribute("colMove", colMove);
-          ellipse.setAttribute("rowMove", rowMove);
-          ellipse.setAttribute("newPosition", newPosition);
-          ellipse.setAttribute("newPositionRow", newPositionRow);
+
+
+
+          //pawns new position for colum and row
+          let newPosition = parseFloat(pawn.style.left) + colMove * 55;
+          let newPositionRow = parseFloat(pawn.style.top) + rowMove * 55;
+
+
+          pawn.setAttribute("colMove", colMove);
+          pawn.setAttribute("rowMove", rowMove);
+          pawn.setAttribute("newPosition", newPosition);
+          pawn.setAttribute("newPositionRow", newPositionRow);
 
 
           //new position
           // let newRow = ellipse.row + rowMove;
           //let newCol = ellipse.col + colMove;
-          ellipse.setAttribute("move", "moving")
+          pawn.setAttribute("move", "moving")
+
         }
 
+        //if state of pawn is moving then move this code
+        if (pawn.getAttribute("move") === "moving") {
 
-        if (ellipse.getAttribute("move") === "moving") {
-
-          let colMove = parseInt(ellipse.getAttribute("colMove"));
-          let rowMove = parseInt(ellipse.getAttribute("rowMove"));
-          let newPosition = parseFloat(ellipse.getAttribute("newPosition"));
-          let newPositionRow = parseFloat(ellipse.getAttribute("newPositionRow"));
+          //get attribute
+          let colMove = parseInt(pawn.getAttribute("colMove"));
+          let rowMove = parseInt(pawn.getAttribute("rowMove"));
+          let newPosition = parseFloat(pawn.getAttribute("newPosition"));
+          let newPositionRow = parseFloat(pawn.getAttribute("newPositionRow"));
 
           if (colMove !== 0) {
             console.log(colMove)
 
-            ellipse.style.left = parseFloat(ellipse.style.left) + (1 * colMove) + "px";
-            console.log(ellipse.style.left)
+            //to move left or right
+            pawn.style.left = parseFloat(pawn.style.left) + (1 * colMove) + "px";
+            console.log(pawn.style.left)
           }
 
           if (rowMove !== 0) {
             console.log(rowMove)
 
-            ellipse.style.top = parseFloat(ellipse.style.top) + (1 * rowMove) + "px";
-            console.log(ellipse.style.top)
+            //to move up or down
+            pawn.style.top = parseFloat(pawn.style.top) + (1 * rowMove) + "px";
+            console.log(pawn.style.top)
           }
-
-          if (parseFloat(ellipse.style.left) === parseFloat(newPosition)) {
+          //if pawn is a new position
+          if (parseFloat(pawn.style.left) === parseFloat(newPosition)) {
             console.log("stop")
-            ellipse.setAttribute("move", "false")
+
+            //then turn into false and wait 500ms then move again
+            pawn.setAttribute("move", "false")
 
             setTimeout(function () {
-              ellipse.setAttribute("move", "true")
+              pawn.setAttribute("move", "true")
             }, 500)
           }
-          if (parseFloat(ellipse.style.top) === parseFloat(newPositionRow)) {
-            console.log("stop")
-            ellipse.setAttribute("move", "false")
+          /* 
+                    if (parseFloat(pawn.style.top) === parseFloat(newPositionRow)) {
+                      console.log("stop")
+                      pawn.setAttribute("move", "false")
+          
+                      setTimeout(function () {
+                        pawn.setAttribute("move", "true")
+                      }, 500)
+                    } */
 
-            setTimeout(function () {
-              ellipse.setAttribute("move", "true")
-            }, 500)
-          }
-
-          console.log(ellipse.style.left)
+          console.log(pawn.style.left)
           // ellipse.style.top = ellipse.row * 55 + 15 + "px";
         }
+        //
       }
       requestAnimationFrame(animate);
+
     }
     requestAnimationFrame(animate);
-  }
 
+    /*     function checkBounds(parent, ellipse) {
+          let boundingBoxParent = parentCanvas.getBoundingClientRect();
+          if (parseFloat(ellipse.style.left) > boundingBoxParent) {
+            colMove = 1;
+    
+          }
+          else if (parseFloat(ellipse.style.left) < boundingBoxParent) {
+            colMove = -1;
+    
+          }
+    
+          if (parseFloat(ellipse.style.top) > boundingBoxParent) {
+            rowMove = 1;
+    
+          }
+        } */
+
+
+  }
 }
