@@ -2,7 +2,7 @@ setup_E();
 
 //b:Sama,4 pictures grid different colors, hover randomizes colors
 //a:Dylan, grid of 50 letters, space randomizes, look for words
-//3:
+//D:Chessboard
 /** THEME: SARCASM  */
 function setup_E() {
   console.log("in e");
@@ -117,98 +117,7 @@ function setup_E() {
 
     ];
 
-    //get bound
-    // let boundingBoxParent = parentCanvas.getBoundingClientRect();
 
-    /* let stars = 25;
-    let starsCount = 0;
-    let speed = 100;
-    //make mutiple lines
-    /*   function addCircles() {
-        for (let i = 0; i < stars; i++) {
-          let ellipse = document.createElement("div");
-          parentCanvas.appendChild(ellipse);
-          ellipse.style.position = "absolute";
-          ellipse.style.left = `${Math.random() * (window.innerWidth - 200)}px`;
-          ellipse.style.top = `${Math.random() * (window.innerWidth - 200)}px`;
-          ellipse.style.width = "10px";
-          ellipse.style.height = "10px";
-          ellipse.style.opacity = 1;
-          ellipse.style.background = sampleColors[parseInt(Math.random() * sampleColors.length)];
-          ellipse.style.borderRadius = "50%";
-          if (speed > 200) {
-            speed -= 20;
-          }
-  
-          setTimeout(addCircles, speed);
-  
-        }
-      }
-      addCircles(); */
-
-    /* function addCircles() {
- 
-       //if (starsCount === stars) return;
- 
-       let ellipse = document.createElement("div");
-       parentCanvas.appendChild(ellipse);
-       ellipse.style.position = "absolute";
- 
-       let boundingBoxParent = parentCanvas.getBoundingClientRect();
-       ellipse.style.left = `${Math.random() * (boundingBoxParent.width - 10)}px`;
-       ellipse.style.top = `${Math.random() * (boundingBoxParent.height - 10)}px`;
-       ellipse.style.width = "10px";
-       ellipse.style.height = "10px";
-       ellipse.style.opacity = 1;
-       ellipse.style.background = sampleColors[parseInt(Math.random() * sampleColors.length)];
-       ellipse.style.borderRadius = "50%";
- 
-       // let circleSpeed = Math.random() < 0.5 ? 1 : -1;//move right or left
-       let speedX = Math.random() < 0.5 ? 2 : -2;
- 
-       function animate() {
-         ellipse.style.left = parseInt(ellipse.style.left) + speedX + "px";
- 
- 
- 
-         window.requestAnimationFrame(animate);
-         // checkBounds(document.getElementById("parent"), ellipse)
- 
-         /*       if (ellipse.style.left === 0) {
-                 ellipse.style.left = 0;
-                 speedX *= -1;
-       
-               } else if (ellipse.style.left + 10 >= boundingBoxParent) {
-                 ellipse.style.left = boundingBoxParent.width - 10;
-                 speedX *= -1;
-               } */
-    /*  }
-      animate();
-
-
-      //starsCount++;
-      if (speed > 200) {
-        speed -= 20;
-      }
-
-      /*       function checkBounds(parent, ellipse) {
-              let bounds = parent.getBoundingClientRect();
-      
-              if (parseInt(ellipse.style.left) > bounds.right) {
-                speedX *= -1;
-              } else if (parseInt(ellipse.style.left) < bounds.left) {
-                speedX *= -1;
-              } */
-
-    //}
-
-    /* setTimeout(addCircles, speed);
-
-   }
-
-   addCircles();
- } */
-    let boundingBoxParent = parentCanvas.getBoundingClientRect();
     let size = 7;
     let squareS = 60;
 
@@ -246,7 +155,7 @@ function setup_E() {
     }
     let ellipseS = 35;
     let circles = [];
-    let images = ["image1.png", "image2.png", "image3.png"];
+    let images = ["./images/image1.png", "./images/image2.png", "./images/image3.png"];
 
     //for circles/images
     function addCircles(row, col) {
