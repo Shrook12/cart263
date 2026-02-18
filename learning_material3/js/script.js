@@ -1,6 +1,16 @@
 window.onload = function () {
     // Our garden
     let garden = {
+
+        // An array to store the individual birds
+        birds: [],
+        // How many birds in the garden
+        numBirds: 10,
+
+
+        numDogs: 10,
+        dogs: [],
+
         // An array to store the individual flowers
         flowers: [],
         // How many flowers in the garden
@@ -73,13 +83,78 @@ window.onload = function () {
         )`;
         document.getElementsByTagName("main")[0].appendChild(garden.grass.grassDiv);
     }
+
+    function createDogs() {
+        // Create the correct number of dogs and put them in our array
+        for (let i = 0; i < garden.numDogs; i++) {
+            let x = Math.random() * window.innerWidth;
+            let y = Math.random() * 100;
+            let dog = new Dog(x, y, 15, 15);
+            garden.dogs.push(dog);
+        }
+
+    }
+    function createBirds() {
+        //create some birds
+        for (let i = 0; i < garden.numBirds; i++) {
+            let x = Math.random() * window.innerWidth;
+            let y = Math.random() * 100;
+            let bird = new Bird(x, y, 15, 15);
+            garden.birds.push(bird);
+        }
+    }
+    function renderAnimals() {
+        // Go through all the animals and move, wrap, and display them
+        for (let i = 0; i < garden.dogs.length; i++) {
+            let dog = garden.dogs[i];
+            dog.renderAnimal();
+        }
+
+        // Go through all the birds and move, wrap, and display them
+        for (let i = 0; i < garden.birds.length; i++) {
+            let bird = garden.birds[i];
+            bird.renderAnimal();
+        }
+
+    }
+    function updateGarden() {
+        // Go through all the animals and move, wrap, and display them
+        for (let i = 0; i < garden.dogs.length; i++) {
+            let dog = garden.dogs[i];
+            dog.move();
+            dog.wrap();
+
+        }
+
+        // Go through all the birds and move, wrap, and display them
+        for (let i = 0; i < garden.birds.length; i++) {
+            let bird = garden.birds[i];
+            bird.move();
+            bird.wrap();
+        }
+        // if the first dog is set to jump
+        if (garden.dogs[0].isjumping === true) {
+            console.log("jump")
+            garden.dogs[0].updateJump()
+            for (let k = 0; k < garden.birds.length; k++) {
+                garden.dogs[0].catchBird(garden.birds[k])
+            }
+        }
+        window.requestAnimationFrame(updateGarden)
+    }
     /* render the sun, sky and grass*/
     createAndRenderTheGarden();
+    createDogs();//make dog
+    createBirds();//make birds
+    renderAnimals();
+    window.requestAnimationFrame(updateGarden);
+
     // let flower = new Flower();
     // flower.renderFlower(); */
     // let flower = createFlower();
     //    renderFlower(flower);
-    for (let i = 0; i < garden.numFlowers; i++) {
+
+    /* for (let i = 0; i < garden.numFlowers; i++) {
         // Create variables for our arguments for clarity
         let x = Math.random() * (window.innerWidth - 100);
         let y = Math.random() * 120;
@@ -98,11 +173,27 @@ window.onload = function () {
     }
     for (let i = 0; i < garden.flowers.length; i++) {
         garden.flowers[i].renderFlower();
-    }
+    } */
     sun.renderSun();
     window.addEventListener("keydown",
         function handleKeyDown(event) {
             // console.log(event.key)
             sun.handleKeyEvent(event);
         })
+
+
+    // new jump on key press
+    window.addEventListener("keydown", function (e) {
+        //set up to allow got "0" to jump 
+        if (e.code === "Space") {
+            //prevent default behaviour of the space bar
+            e.preventDefault()
+            //check if the dog is already jumping
+            if (garden.dogs[0].isjumping === false) {
+                garden.dogs[0].jump()
+            }
+
+        }
+    })
 }
+
