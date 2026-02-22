@@ -29,25 +29,19 @@ body {
     top: 10px;
 }
 
-.animal {
+.nut {
     padding: 0;
     margin: 0;
     position: absolute;
-    background-color: crimson;
+    background-color: rgb(76, 55, 19);
+    overflow: hidden;
 }
 
-.nut {
-    width: 200x;
-    height: 200px;
-    border-radius: 50px;
-    position: absolute;
-    left: 10px;
-    top: 10px;
-    background-color: blue;
-    /*  background-image: url(/illustrationnut.png);
-    background-repeat: no-repeat;
-    background-size: cover;
-} */
+.nut-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
 }
 
 /* flower style */

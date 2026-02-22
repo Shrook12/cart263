@@ -2,8 +2,14 @@ window.onload = function () {
   // Our garden
   let garden = {
 
+    score: 0,
     numNuts: 50,
     nuts: [],
+
+    // An array to store the individual birds
+    squirrels: [],
+    // How many birds in the garden
+    numSquirrels: 5,
     // An array to store the individual flowers
     flowers: [],
     // How many flowers in the garden
@@ -32,6 +38,7 @@ window.onload = function () {
       skyDiv: document.createElement("div"),
     },
   };
+
   // new  sun instancce
   let sun = new Sun(10, 10, { r: 240, g: 206, b: 83 })
 
@@ -72,29 +79,128 @@ window.onload = function () {
       // Add the flower to the array of flowers
       garden.flowers[i].renderFlower();
     }
-  }
-
-  function createNut() {
+    ///////// 
+    //create nuts
 
     //create number of nuts and put them in our array
     for (let i = 0; i < garden.numNuts; i++) {
       let x = Math.random() * window.innerWidth;
-      let y = Math.random() * 100;
+      let y = Math.random() * 200;
       let nut = new Nut(x, y, 15, 15);
       garden.nuts.push(nut);
     }
-  }
-
-  function renderNuts() {
+    ////////
     //go through all the nuts and display
     for (let i = 0; i < garden.nuts.length; i++) {
       let nut = garden.nuts[i];
       nut.renderNut();
     }
+
+    ///////
+
+    /*    for (let i = 0; i < garden.numSquirrels; i++) {
+   
+         let x = Math.random() * window.innerWidth;
+         let y = Math.random() * 200;
+         let size = 30 + Math.random() * 40
+   
+         let squirrel = new Squirrel(x, y, size, size);
+         garden.squirrels.push(squirrel);
+       } */
+    /////////
+    //create some birds
+    for (let i = 0; i < garden.numSquirrels; i++) {
+      let x = Math.random() * window.innerWidth;
+      let y = Math.random() * 100;
+      let size = 30 + Math.random() * 40
+      let squirrel = new Squirrel(x, y, size, size);
+      garden.squirrels.push(squirrel);
+    }
+    //go through all the nuts and display
+    for (let i = 0; i < garden.squirrels.length; i++) {
+      let squirrel = garden.squirrels[i];
+      squirrel.renderAnimal();
+    }
+    //////////
+
   }
+
+  //ipdate squirrels
+  const scoreDisplay = document.createElement("div");
+  scoreDisplay.style.position = "absolute";
+  scoreDisplay.style.top = "10px";
+  scoreDisplay.style.left = "10px";
+  scoreDisplay.style.fontSize = "24px";
+  scoreDisplay.style.fontWeight = "bold";
+  scoreDisplay.style.color = "black";
+  scoreDisplay.textContent = "Nuts: 0";
+  document.body.appendChild(scoreDisplay);
+
+
+  garden.score = 0;
+
+
+  function updateScore() {
+    garden.score++;
+    scoreDisplay.textContent = "Nuts: " + garden.score;
+  }
+
+
+  function updateGarden() {
+    for (let i = 0; i < garden.squirrels.length; i++) {
+      let squirrel = garden.squirrels[i];
+      squirrel.animateSquirrel();
+      squirrel.wrap();
+    }
+    for (let s = 0; s < garden.squirrels.length; s++) {
+      for (let n = garden.nuts.length - 1; n >= 0; n--) {
+        let squirrel = garden.squirrels[s];
+        let nut = garden.nuts[n];
+
+        if (squirrel.catchNut(nut)) {
+
+          nut.active = false;
+
+
+          if (nut.nutBody) {
+            nut.nutBody.remove();
+          }
+
+
+          garden.nuts.splice(n, 1);
+
+          updateScore();
+
+
+          createNewNut();
+        }
+      }
+    }
+    window.requestAnimationFrame(updateGarden);
+
+  }
+
+  //to add new nut
+  function createNewNut() {
+    let x = Math.random() * window.innerWidth;
+    let y = Math.random() * 200;
+    let newNut = new Nut(x, y, 15, 15);
+
+    newNut.renderNut(); // 
+    garden.nuts.push(newNut);
+  }
+
+  /*   function addAnimationSquirrels() {
+      for (var i = 0; i < garden.squirrels.length; i++) {
+        garden.squirrels[i].animateSquirrel();
+      }
+    } */
+
+
   createAndRenderTheGarden();
-  createNut();
-  renderNuts();
+  window.requestAnimationFrame(updateGarden);
+
+  //addAnimationSquirrels();
 }
 
 

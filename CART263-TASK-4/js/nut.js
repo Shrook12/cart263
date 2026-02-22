@@ -1,16 +1,17 @@
 
 class Nut {
-    //create a new nut object that moves to the right
+
     constructor(x, y, width, height) {
         this.x = x;
         this.y = y;
+        this.active = true;
         this.width = width;
         this.height = height;
         this.nutBody = document.createElement("div");
 
     }
 
-    //display the dog as a ellipse
+
     renderNut() {
         this.nutBody.classList.add("nut");
         this.nutBody.style.width = this.width + "px";
