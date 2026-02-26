@@ -11,3 +11,9 @@ main {
     margin: 0 auto;
     text-align: center;
 }
+
+#drawingCanvas {
+    background-image: url('../images/paper.png');
+    background-size: cover;
+    border: 1px solid #ccc;
+}
