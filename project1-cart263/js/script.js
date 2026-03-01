@@ -71,8 +71,10 @@ window.onload = function () {
     }
 
     let handleDragging = function (event) {
-        event.dataTransfer.clearData();
-        event.dataTransfer.setData("objDraggedID", event.target.id);
+        let targetId = event.target.closest('[draggable="true"]').id;
+        event.dataTransfer.setData("objDraggedID", targetId);
+        // event.dataTransfer.clearData();
+        //event.dataTransfer.setData("objDraggedID", event.target.id);
 
     };
     window.addEventListener("dragstart", handleDragging);
@@ -98,8 +100,10 @@ window.onload = function () {
                 let x = event.clientX - rect.left;
                 let y = event.clientY - rect.top;
 
-
+                context.globalCompositeOperation = "source-over";
                 context.drawImage(img, x, y, 100, 100);
+
+                context.beginPath();
             }
 
         }
