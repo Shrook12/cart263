@@ -6,6 +6,7 @@ window.onload = function () {
     let buttonPencil = document.getElementById("drawPencil");
     let buttonErase = document.getElementById("eraser");
     let buttonPen = document.getElementById("pen");
+    let buttonBrush = document.getElementById("brush");
 
     let state = "pencil";
     let drawing = false;
@@ -19,6 +20,9 @@ window.onload = function () {
     })
     buttonPen.addEventListener("click", function () {
         state = "pen"
+    })
+    buttonBrush.addEventListener("click", function () {
+        state = "brush";
     })
 
     //mouse events
@@ -45,8 +49,10 @@ window.onload = function () {
         } else if (state === "pen") {
 
             context.lineWidth = 8;
-        } else {
+        } else if (state === "brush") {
 
+            context.lineWidth = 25;
+        } else if (state === "pencil") {
             context.lineWidth = 4;
         }
         context.lineCap = "round";
@@ -64,7 +70,45 @@ window.onload = function () {
         context.beginPath();
     }
 
+    let handleDragging = function (event) {
+        event.dataTransfer.clearData();
+        event.dataTransfer.setData("objDraggedID", event.target.id);
 
+    };
+    window.addEventListener("dragstart", handleDragging);
+
+    //to drag
+    let handleDraggingStop = function (event) {
+
+    }
+    window.addEventListener("dragend", handleDraggingStop);
+
+    let handleDrop = function (event) {
+        event.preventDefault();
+
+        if (event.target.id === "drawingCanvas") {
+
+            let draggedId = event.dataTransfer.getData("objDraggedID")
+            let draggedDiv = document.getElementById(draggedId);
+
+            let img = draggedDiv.querySelector("img");
+
+            if (img) {
+                let rect = canvas.getBoundingClientRect();
+                let x = event.clientX - rect.left;
+                let y = event.clientY - rect.top;
+
+
+                context.drawImage(img, x, y, 100, 100);
+            }
+
+        }
+    }
+    window.addEventListener("drop", handleDrop);
+
+    window.addEventListener("dragover", function (event) {
+        event.preventDefault();
+    })
     /*  function drawPencil() {
  
      }
