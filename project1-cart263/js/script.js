@@ -5,8 +5,21 @@ window.onload = function () {
     let context = canvas.getContext("2d");
     let buttonPencil = document.getElementById("drawPencil");
     let buttonErase = document.getElementById("eraser");
+    let buttonPen = document.getElementById("pen");
+
+    let state = "pencil";
     let drawing = false;
-    let eraser = false;
+
+    buttonPencil.addEventListener("click", function () {
+        state = "pencil";
+
+    })
+    buttonErase.addEventListener("click", function () {
+        state = "eraser";
+    })
+    buttonPen.addEventListener("click", function () {
+        state = "pen"
+    })
 
     //mouse events
     canvas.addEventListener("mousedown", startDrawing);
@@ -20,10 +33,23 @@ window.onload = function () {
         let x = e.clientX - rect.left;
         let y = e.clientY - rect.top;
 
-        context.lineWidth = 4;
-        context.lineCap = "round";
-        context.strokeStyle = "purple";
+        context.globalCompositeOperation = "source-over";
+        context.strokeStyle = "black";
 
+        /*  context.lineWidth = 4;
+         context.lineCap = "round";
+         context.background = "black"; */
+        if (state === "eraser") {
+            context.globalCompositeOperation = "destination-out";
+            context.lineWidth = 20;
+        } else if (state === "pen") {
+
+            context.lineWidth = 8;
+        } else {
+
+            context.lineWidth = 4;
+        }
+        context.lineCap = "round";
         context.lineTo(x, y);
         context.stroke();
         context.beginPath();
@@ -31,7 +57,7 @@ window.onload = function () {
     }
     function startDrawing(e) {
         drawing = true;
-        draw();
+        draw(e);
     }
     function stopDrawing(e) {
         drawing = false;
