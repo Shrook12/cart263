@@ -7,6 +7,7 @@ window.onload = function () {
     let buttonErase = document.getElementById("eraser");
     let buttonPen = document.getElementById("pen");
     let buttonBrush = document.getElementById("brush");
+    let colorChange = document.getElementById("colorChange");
 
     let state = "pencil";
     let drawing = false;
@@ -38,7 +39,7 @@ window.onload = function () {
         let y = e.clientY - rect.top;
 
         context.globalCompositeOperation = "source-over";
-        context.strokeStyle = "black";
+        context.strokeStyle = colorChange.value;
 
         /*  context.lineWidth = 4;
          context.lineCap = "round";
@@ -113,6 +114,7 @@ window.onload = function () {
     window.addEventListener("dragover", function (event) {
         event.preventDefault();
     })
+
     /*  function drawPencil() {
  
      }
