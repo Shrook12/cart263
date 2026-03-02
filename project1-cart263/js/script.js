@@ -8,6 +8,7 @@ window.onload = function () {
     let buttonPen = document.getElementById("pen");
     let buttonBrush = document.getElementById("brush");
     let colorChange = document.getElementById("colorChange");
+    let buttonClear = document.getElementById("clear");
 
     let state = "pencil";
     let drawing = false;
@@ -115,6 +116,24 @@ window.onload = function () {
         event.preventDefault();
     })
 
+    buttonClear.addEventListener("click", function () {
+        let drawImg = new Image();
+        drawImg.src = canvas.toDataURL();
+
+        let y = 0;
+
+        function animate() {
+            //this is to earse pixels within the canvas
+            context.clearRect(0, 0, canvas.width, canvas.height);
+            context.drawImage(drawImg, 0, y);
+            y += 5;
+
+            if (y <= canvas.height) {
+                requestAnimationFrame(animate);
+            }
+        }
+        requestAnimationFrame(animate);
+    })
     /*  function drawPencil() {
  
      }
