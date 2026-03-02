@@ -9,6 +9,9 @@ window.onload = function () {
     let buttonBrush = document.getElementById("brush");
     let colorChange = document.getElementById("colorChange");
     let buttonClear = document.getElementById("clear");
+    let undo = [];
+    let redo = [];
+    let history = 20;
 
     let state = "pencil";
     let drawing = false;
