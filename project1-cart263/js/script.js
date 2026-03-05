@@ -9,8 +9,13 @@ window.onload = function () {
     let buttonBrush = document.getElementById("brush");
     let colorChange = document.getElementById("colorChange");
     let buttonClear = document.getElementById("clear");
+    let buttonUndo = document.getElementById("undo");
+    let buttonRedo = document.getElementById("redo");
+    let sizeChange = document.getElementById("slider");
+    let drawImg = new Image();
+
     let undo = [];
-    let redo = [];
+    let index = -1;
     let history = 20;
 
     let state = "pencil";
@@ -50,15 +55,15 @@ window.onload = function () {
          context.background = "black"; */
         if (state === "eraser") {
             context.globalCompositeOperation = "destination-out";
-            context.lineWidth = 20;
+            context.lineWidth = slider.value;
         } else if (state === "pen") {
 
-            context.lineWidth = 8;
+            context.lineWidth = slider.value;
         } else if (state === "brush") {
 
-            context.lineWidth = 25;
+            context.lineWidth = slider.value;
         } else if (state === "pencil") {
-            context.lineWidth = 4;
+            context.lineWidth = slider.value;
         }
         context.lineCap = "round";
         context.lineTo(x, y);
@@ -73,6 +78,7 @@ window.onload = function () {
     function stopDrawing(e) {
         drawing = false;
         context.beginPath();
+
     }
 
     let handleDragging = function (event) {
@@ -120,7 +126,7 @@ window.onload = function () {
     })
 
     buttonClear.addEventListener("click", function () {
-        let drawImg = new Image();
+
         drawImg.src = canvas.toDataURL();
 
         let y = 0;
@@ -137,6 +143,8 @@ window.onload = function () {
         }
         requestAnimationFrame(animate);
     })
+
+
     /*  function drawPencil() {
  
      }

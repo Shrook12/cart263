@@ -11,22 +11,8 @@
 
 <body>
     <main>
-        <section id="toolbar">
-            <div id="drawingTools">
-                <button id="drawPencil" class="drawPencil">Pencil</button>
-                <button id="eraser" class="eraser">eraser</button>
-                <button id="pen" class="pen">pen</button>
-                <button id="brush" class="brush">brush</button>
-                <label for="colorChange">Color</label>
-                <input type="color" id="colorChange" value="#000000">
+        <section id="container">
 
-                <button id="clear">Clear</button>
-                <!--  
-                <button id="drawPencil"></button>
-                <button id="drawPencil"></button>
-                <button id="drawPencil"></button>
-                <button id="drawPencil"></button> -->
-            </div>
 
             <div id="draggable-tool">
                 <div id="sticker1" class="box" draggable="true">
@@ -38,33 +24,36 @@
 
             </div>
 
-            <!--             <div id="shapes">
-                <button id="drawPencil"></button>
-                <button id="drawPencil"></button>
-                <button id="drawPencil"></button>
-                <button id="drawPencil"></button>
-                <button id="drawPencil"></button>
-                <button id="drawPencil"></button>
-            </div> -->
+            <!--   <img src="images/paper.png"> -->
+            <div class="canvasarea">
+                <canvas id="drawingCanvas" width=700 height=400></canvas>
+                <div id="toolbar">
+                    <button id="drawPencil" class="button">
+                        <img src="images/pencil.PNG">
+                    </button>
+                    <button id="eraser" class="button">
+                        <img src="images/eraser.PNG">
+                    </button>
+                    <button id="pen" class="button">
+                        <img src="images/pen.PNG">
+                    </button>
+                    <button id="brush" class="button">
+                        <img src="images/brush.PNG">
+                    </button>
+                    <label for="colorChange">Color</label>
+                    <input type="color" id="colorChange" value="#000000">
 
-            <!--          <div id="colors">
-                <button id="drawPencil"></button>
-                <button id="drawPencil"></button>
-                <button id="drawPencil"></button>
-                <button id="drawPencil"></button>
-                <button id="drawPencil"></button>
-                <button id="drawPencil"></button>
-            </div> -->
+
+                </div>
+                <button id="clear">Clear</button>
+                <button id="undo">undo</button>
+                <button id="redo">redo</button>
+
+                <div class="slide">
+                    <input type="range" min="1" max="100" value="5" class="slider" id="slider">
+                </div>
+            </div>
         </section>
-        <!--         <section id="others">
-            <button id="undo"></button>
-            <button id="redo"></button>
-            <button id="clear"></button>
-            <button id="save"></button>
-
-        </section> -->
-        <!--   <img src="images/paper.png"> -->
-        <canvas id="drawingCanvas" width=700 height=400></canvas>
     </main>
 
 </body>

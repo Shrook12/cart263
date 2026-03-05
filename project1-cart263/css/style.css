@@ -1,5 +1,5 @@
 body {
-    background-color: antiquewhite;
+    background-color: rgb(192, 192, 192);
     margin: 0;
     padding: 0;
     color: black;
@@ -13,7 +13,38 @@ main {
 }
 
 #drawingCanvas {
-    background-image: url('../images/paper.png');
-    background-size: cover;
+    background-color: white;
+    /*     background-image: url('../images/paper.png'); */
     border: 1px solid #ccc;
+}
+
+.container {
+    display: flex;
+    gap: 20px;
+}
+
+.canvasarea {
+    position: relative;
+}
+
+.button {
+    background-color: transparent;
+    border: none;
+    transition: transform 0.2s;
+}
+
+.button img {
+    width: 100px;
+}
+
+#toolbar {
+    position: absolute;
+    bottom: -15px;
+    left: 30px;
+    display: flex;
+    gap: 10px;
+}
+
+.button:hover {
+    transform: translateY(-5px);
 }
