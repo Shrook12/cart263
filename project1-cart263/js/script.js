@@ -144,7 +144,31 @@ window.onload = function () {
         requestAnimationFrame(animate);
     })
 
+    let arrow = document.getElementById("arrow");
+    let box = document.getElementById("challenge");
 
+    arrow.addEventListener("click", function () {
+        box.classList.toggle("collapsed");
+
+        if (box.classList.contains("collapsed")) {
+            arrow.innerText = "▲";
+        } else {
+            arrow.innerText = "▼";
+        }
+    })
+    let challenges = [
+        "Draw a dragon cat using only the color blue",
+        "Today use only red",
+        "Draw an imaginary city that is inversed",
+        "Draw a weird face"
+    ]
+    function randomChallenge() {
+        let text = document.getElementById("random-challenge");
+        let randomIndex = Math.floor(Math.random() * challenges.length);
+
+        text.innerText = challenges[randomIndex];
+    }
+    randomChallenge();
     /*  function drawPencil() {
  
      }
