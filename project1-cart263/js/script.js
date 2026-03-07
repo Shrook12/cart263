@@ -186,8 +186,27 @@ window.onload = function () {
         link.click();
     })
 
-    let exercise = ["exercise1, excercise2, exercise3"]
+    let exercise = ["exercise1", "excercise2", "exercise3"]
 
+    window.setInterval(addBreak, 5000);
+
+    function addBreak() {
+
+        let overlay = document.getElementById("overlap");
+        let textMessage = document.getElementById("message-content");
+
+
+        let randomIndex = Math.floor(Math.random() * exercise.length);
+
+        textMessage.innerText = exercise[randomIndex];
+
+        overlay.style.display = "flex";
+
+        setTimeout(function () {
+            overlay.style.display = "none";
+        }, 2000);
+
+    }
     /*  function drawPencil() {
  
      }
