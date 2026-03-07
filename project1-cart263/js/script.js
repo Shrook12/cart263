@@ -12,6 +12,7 @@ window.onload = function () {
     let buttonUndo = document.getElementById("undo");
     let buttonRedo = document.getElementById("redo");
     let sizeChange = document.getElementById("slider");
+    let saveImage = document.getElementById("save");
     let drawImg = new Image();
 
     let undo = [];
@@ -21,6 +22,11 @@ window.onload = function () {
     let state = "pencil";
     let drawing = false;
 
+    function colorCanvas() {
+        context.fillStyle = "white";
+        context.fillRect(0, 0, canvas.width, canvas.height);
+    }
+    colorCanvas();
     buttonPencil.addEventListener("click", function () {
         state = "pencil";
 
@@ -156,6 +162,7 @@ window.onload = function () {
             arrow.innerText = "▼";
         }
     })
+
     let challenges = [
         "Draw a dragon cat using only the color blue",
         "Today use only red",
@@ -169,6 +176,18 @@ window.onload = function () {
         text.innerText = challenges[randomIndex];
     }
     randomChallenge();
+
+    saveImage.addEventListener("click", function () {
+
+
+        let link = document.createElement("a");
+        link.download = "drawing.png";
+        link.href = canvas.toDataURL();
+        link.click();
+    })
+
+    let exercise = ["exercise1, excercise2, exercise3"]
+
     /*  function drawPencil() {
  
      }
@@ -185,5 +204,6 @@ window.onload = function () {
      function textures() {
  
      } */
+
 
 }
