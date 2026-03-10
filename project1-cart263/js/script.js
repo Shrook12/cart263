@@ -238,7 +238,6 @@ window.onload = function () {
 
     /**to save and download the image on save button */
     saveImage.addEventListener("click", function () {
-
         //create a link
         let link = document.createElement("a");
         //name for the downloaded image
@@ -265,12 +264,12 @@ window.onload = function () {
     }, {
         title: "Wall Push-Offs",
         text: "Stand 2 feet from a wall, lean in for a push-up, and push back firmly. ",
-        img: "images/giantstretch.png"
+        img: "images/plank.png"
     },
     {
         title: "Walk",
         text: "Walk to the nearest window and back for 5 minutes ",
-        img: "images/pen.PNG"
+        img: "images/starjump.png"
     }];
 
     //I added a 1 minute drawing and one minutre break just for the trying but it's
