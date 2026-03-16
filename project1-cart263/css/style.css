@@ -111,7 +111,7 @@ body {
     color: black;
     border-radius: 8px;
     overflow: hidden;
-    transition: 0.3s ease;
+
     z-index: 100;
 }
 
@@ -121,6 +121,7 @@ body {
     cursor: pointer;
     display: flex;
     justify-content: space-between;
+
 
 }
 

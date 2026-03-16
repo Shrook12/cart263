@@ -96,6 +96,7 @@ window.onload = function () {
             context.fillStyle = colorChange.value;
             context.arc(x, y, radius, 0, Math.PI * 2);
             context.fill();
+
             //make the opacity back to 100%
             context.globalAlpha = 1.0;
 
@@ -334,4 +335,6 @@ window.onload = function () {
             context.drawImage(drawImg, 0, 0);
         }
     }
+
+
 }
