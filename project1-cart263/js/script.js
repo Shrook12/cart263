@@ -215,9 +215,9 @@ window.onload = function () {
         box.classList.toggle("collapsed");
 
         if (box.classList.contains("collapsed")) {
-            arrow.innerText = "▲";
+            arrow.innerText = "▴";
         } else {
-            arrow.innerText = "▼";
+            arrow.innerText = "▾";
         }
     })
 
