@@ -21,7 +21,7 @@ This bit should attribute any code, assets or other elements used taken from oth
 
 > - This project uses some of the Create a drawing app using JavaScript and canvas by Adam Nagy: https://dev.to/javascriptacademy/create-a-drawing-app-using-javascript-and-canvas-2an1
 
-> - The project was inspried by some of these p5js tutorials on different brushes:How to Paint with Code: Creating Your Brushes by Arianna Ninh
+> - The project was inspried and uses some ideas by some of the p5js tutorials on different brushes:How to Paint with Code: Creating Your Brushes by Arianna Ninh
 : https://library.superhi.com/posts/how-to-paint-with-code-creating-paintbrushes
 
 > - This project uses some of the code in Build A Drawing App using JavaScript by geeks for geeks: https://www.geeksforgeeks.org/javascript/build-a-drawing-app-using-javascript/
