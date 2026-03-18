@@ -6,6 +6,9 @@ async function getMicrophoneInput() {
     window.AudioContext = window.AudioContext || window.webkitAudioContext;
     let audioContext = new AudioContext();//using the web audio library
 
+    let canvas = document.getElementById("drawingCanvas");
+    let context = canvas.getContext("2d");
+
     try {
         //returns a MediaStreamAudioSourceNode.
         let audioStream = await navigator.mediaDevices.getUserMedia({
@@ -40,6 +43,8 @@ async function getMicrophoneInput() {
 
         let drawVisual = requestAnimationFrame(animateVisual);
         function animateVisual() {
+            context.fillStyle = "rgb(0,0,0)";
+            context.fillRect(0, 0, WIDTH, HEIGHT);
             analyser.getByteFrequencyData(dataArrayFreq);
             //     //each respective frequency goes in its own bin
             //lowest to highest frequency domain
@@ -49,10 +54,28 @@ async function getMicrophoneInput() {
 
             //each bin represents a given frequency
             //get only the first
-            for (let i = 0; i < 1; i++) {
+
+
+            /*        for (let i = 0; i < 1; i++) {
+                       //frequency value in that bin (more dominant will be higher)
+                       console.log(dataArrayFreq[i]);
+       
+                   } */
+
+            //each bin represents a given frequency
+            //get only the first
+
+            const barWidth = (WIDTH / bufferLength) * 5;
+            let barHeight;
+            let x2 = 0;
+            for (let i = 0; i < bufferLength; i++) {
                 //frequency value in that bin (more dominant will be higher)
                 console.log(dataArrayFreq[i]);
-
+                //frequency value in that bin (more dominant will be higher)
+                barHeight = dataArrayFreq[i];
+                context.fillStyle = `rgb(${barHeight + 100}50 50)`;
+                context.fillRect(x2, HEIGHT - barHeight, barWidth, barHeight);
+                x2 += barWidth + 1;
             }
             drawVisual = requestAnimationFrame(animateVisual);
         }
