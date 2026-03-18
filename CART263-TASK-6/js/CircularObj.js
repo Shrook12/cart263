@@ -33,8 +33,8 @@ class CircularObj {
 
   update() {
     //update circle
-    this.x = this.mouseOffsetX;
-    this.y = this.mouseOffsetY;
+    // this.x = this.mouseOffsetX;
+    //this.y = this.mouseOffsetY;
 
 
     //console.log("circle update");
