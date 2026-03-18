@@ -45,13 +45,13 @@ function go_all_stuff() {
     drawingBoardD.addObj(new VideoObj(0, 0, 400, 300, videoEl, drawingBoardD.context))
     drawingBoardD.display();
 
-    let average = 0;
+
     /*get microphone input*/
     async function getMicrophoneInput() {
 
         window.AudioContext = window.AudioContext || window.webkitAudioContext;
         let audioContext = new AudioContext();
-        let context = canvas.getContext("2d");
+
         try {
             let audioStream = await navigator.mediaDevices.getUserMedia({
                 audio: true,
@@ -71,9 +71,9 @@ function go_all_stuff() {
             requestAnimationFrame(animateFrequencies);
 
             function animateFrequencies() {
-                context.fillRect(canvas.width / 2, canvas.height / 2, average, 30);
-                analyser.getByteFrequencyData(frequencyData);
 
+                analyser.getByteFrequencyData(frequencyData);
+                let average = 0;
                 let sum = 0;
                 for (let i = 0; i < frequencyData.length; i++) {
                     sum += frequencyData[i];

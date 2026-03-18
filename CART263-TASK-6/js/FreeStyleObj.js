@@ -32,7 +32,7 @@ class FreeStyleObj {
     //update freestyle
     // console.log("free style update")
     // this.x+=1;
-    if (average) {
+    if (window.average) {
       this.length += 10;
     }
   }
