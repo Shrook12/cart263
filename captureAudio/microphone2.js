@@ -5,6 +5,9 @@ async function getMicrophoneInput() {
 
     window.AudioContext = window.AudioContext || window.webkitAudioContext;
     let audioContext = new AudioContext(); //using the web audio library
+
+    let canvas = document.getElementById("drawingCanvas");
+    let context = canvas.getContext("2d");
     try {
         //returns a MediaStreamAudioSourceNode.
         let audioStream = await navigator.mediaDevices.getUserMedia({
@@ -27,6 +30,9 @@ async function getMicrophoneInput() {
 
         /****our looping callback function */
         function animateFrequencies() {
+
+            context.clearRect(0, 0, canvas.width, canvas.height);
+
             analyser.getByteFrequencyData(frequencyData);
             let average = 0;
             let sum = 0;
@@ -36,6 +42,11 @@ async function getMicrophoneInput() {
             }
             average = sum / frequencyData.length;
             console.log(average);
+
+            context.fillStyle = "#FF0000";
+            //
+            //use the average frequency
+            context.fillRect(canvas.width / 2, canvas.height / 2, average, 30);
             //call loop ...
             requestAnimationFrame(animateFrequencies);
         }
