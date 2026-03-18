@@ -45,6 +45,7 @@ function go_all_stuff() {
     drawingBoardD.addObj(new VideoObj(0, 0, 400, 300, videoEl, drawingBoardD.context))
     drawingBoardD.display();
 
+    let average = 0;
     /*get microphone input*/
     async function getMicrophoneInput() {
 
@@ -73,7 +74,7 @@ function go_all_stuff() {
             function animateFrequencies() {
                 context.fillRect(canvas.width / 2, canvas.height / 2, average, 30);
                 analyser.getByteFrequencyData(frequencyData);
-                let average = 0;
+
                 let sum = 0;
                 for (let i = 0; i < frequencyData.length; i++) {
                     sum += frequencyData[i];
