@@ -33,15 +33,15 @@ async function getMicrophoneInput() {
         const WIDTH = 500;
         const HEIGHT = 500;
 
-        analyser.fftSize = 1024; // fft conversion from time to frequency samples
+        analyser.fftSize = 1024;// fft conversion from time to frequency samples
         //console.log (analyser.frequencyBinCount) //half of fft size
         const bufferLength = analyser.fftSize;
-        const dataArrayFreq = new Uint8Array(bufferLength); //array
+        const dataArrayFreq = new Uint8Array9(bufferLength);////array
 
         let drawVisual = requestAnimationFrame(animateVisual);
         function animateVisual() {
             analyser.getByteFrequencyData(dataArrayFreq);
-            //each respective frequency goes in its own bin
+            //     //each respective frequency goes in its own bin
             //lowest to highest frequency domain
 
             /* looking for dominant frequencies*/
@@ -52,8 +52,10 @@ async function getMicrophoneInput() {
             for (let i = 0; i < 1; i++) {
                 //frequency value in that bin (more dominant will be higher)
                 console.log(dataArrayFreq[i]);
+
             }
             drawVisual = requestAnimationFrame(animateVisual);
         }
     }
+
 } 
