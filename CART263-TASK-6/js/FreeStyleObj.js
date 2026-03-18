@@ -38,8 +38,10 @@ class FreeStyleObj {
         } */
   }
   giveAverage(average) {
-    this.average = average
+    this.average = average;
     //console.log(this.average)
     this.length = this.average;
+    this.context.fillStyle = this.average;
+
   }
 }

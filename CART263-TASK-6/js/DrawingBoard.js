@@ -93,6 +93,7 @@ class DrawingBoard {
     if (this.drawingBoardId === "partC") {
       for (let i = 0; i < this.objectsOnCanvas.length; i++) {
         this.objectsOnCanvas[i].giveAverage(average)
+
       }
 
     }
