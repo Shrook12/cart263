@@ -81,6 +81,10 @@ function go_all_stuff() {
 
                 average = sum / frequencyData.length;
 
+                drawingBoardC.getAverage(average);
+
+
+
                 requestAnimationFrame(animateFrequencies);
 
             }

@@ -11,6 +11,7 @@ class FreeStyleObj {
     this.yOffset = 20;
     this.angularSpeed = .07;
     this.context = context;
+    this.average = 0;
 
   }
 
@@ -32,8 +33,13 @@ class FreeStyleObj {
     //update freestyle
     // console.log("free style update")
     // this.x+=1;
-    if (window.average) {
-      this.length += 10;
-    }
+    /*     if (window.average) {
+          this.length += 10;
+        } */
+  }
+  giveAverage(average) {
+    this.average = average
+    //console.log(this.average)
+    this.length = this.average;
   }
 }
