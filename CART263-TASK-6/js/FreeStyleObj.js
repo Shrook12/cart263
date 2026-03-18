@@ -32,7 +32,7 @@ class FreeStyleObj {
     //update freestyle
     // console.log("free style update")
     // this.x+=1;
-    if (dataArray) {
+    if (average) {
       this.length += 10;
     }
   }
