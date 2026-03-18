@@ -89,6 +89,7 @@ function go_all_stuff() {
 
     }
     getMicrophoneInput();
+
     /*** RUN THE ANIMATION LOOP  */
     window.requestAnimationFrame(animationLoop);
 
