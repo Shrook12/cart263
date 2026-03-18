@@ -51,7 +51,6 @@ function go_all_stuff() {
 
         window.AudioContext = window.AudioContext || window.webkitAudioContext;
         let audioContext = new AudioContext();
-        let canvas = document.getElementById("drawingCanvas");
         let context = canvas.getContext("2d");
         try {
             let audioStream = await navigator.mediaDevices.getUserMedia({
