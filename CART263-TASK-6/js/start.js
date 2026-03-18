@@ -69,6 +69,7 @@ function go_all_stuff() {
             requestAnimationFrame(animateFrequencies);
 
             function animateFrequencies() {
+                context.fillRect(canvas.width / 2, canvas.height / 2, average, 30);
                 analyser.getByteFrequencyData(frequencyData);
                 let average = 0;
                 let sum = 0;
@@ -87,6 +88,7 @@ function go_all_stuff() {
         }
 
     }
+    getMicrophoneInput();
     /*** RUN THE ANIMATION LOOP  */
     window.requestAnimationFrame(animationLoop);
 
