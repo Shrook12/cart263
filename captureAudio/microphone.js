@@ -28,4 +28,34 @@ async function getMicrophoneInput() {
 
     }
 
+    visualizeTimeAndFreq();
+    function visualizeTimeAndFreq() {
+        const WIDTH = 500;
+        const HEIGHT = 500;
+
+        analyser.fftSize = 1024;// fft conversion from time to frequency samples
+        //console.log (analyser.frequencyBinCount) //half of fft size
+        const bufferLength = analyser.fftSize;
+        const dataArrayFreq = new Uint8Array9(bufferLength);////array
+
+        let drawVisual = requestAnimationFrame(animateVisual);
+        function animateVisual() {
+            analyser.getByteFrequencyData(dataArrayFreq);
+            //     //each respective frequency goes in its own bin
+            //lowest to highest frequency domain
+
+            /* looking for dominant frequencies*/
+            /* higher bars === more dominant frequency  (db)*/
+
+            //each bin represents a given frequency
+            //get only the first
+            for (let i = 0; i < 1; i++) {
+                //frequency value in that bin (more dominant will be higher)
+                console.log(dataArrayFreq[i]);
+
+            }
+            drawVisual = requestAnimationFrame(animateVisual);
+        }
+    }
+
 } 
