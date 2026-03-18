@@ -45,7 +45,48 @@ function go_all_stuff() {
     drawingBoardD.addObj(new VideoObj(0, 0, 400, 300, videoEl, drawingBoardD.context))
     drawingBoardD.display();
 
+    /*get microphone input*/
+    async function getMicrophoneInput() {
 
+        window.AudioContext = window.AudioContext || window.webkitAudioContext;
+        let audioContext = new AudioContext();
+        try {
+            let audioStream = await navigator.mediaDevices.getUserMedia({
+                audio: true,
+            });
+
+            let microphoneIn = audioContext.createMediaStreamSource(audioStream);
+
+            const filter = audioContext.createBiquadFilter();
+            const analyser = audioContext.createAnalyser();
+
+            microphoneIn.connect(filter);
+
+            filter.connect(analyser);
+            analyser.fftSize = 32;
+            let frequencyData = new Uint8Array(analyser.frequencyBinCount);
+
+            requestAnimationFrame(animateFrequencies);
+
+            function animateFrequencies() {
+                analyser.getByteFrequencyData(frequencyData);
+                let average = 0;
+                let sum = 0;
+                for (let i = 0; i < frequencyData.length; i++) {
+                    sum += frequencyData[i];
+                }
+
+                average = sum / frequencyData.length;
+
+                requestAnimationFrame(animateFrequencies);
+
+            }
+        }
+        catch (err) {
+            console.log("had an error getting the microphone")
+        }
+
+    }
     /*** RUN THE ANIMATION LOOP  */
     window.requestAnimationFrame(animationLoop);
 
