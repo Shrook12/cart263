@@ -33,7 +33,7 @@ class FreeStyleObj {
     // console.log("free style update")
     // this.x+=1;
     if (dataArray) {
-      this.height = this.length + (average * 2);
+      this.length += 10;
     }
   }
 }
