@@ -12,24 +12,33 @@ class FreeStyleObj {
     this.angularSpeed = .07;
     this.context = context;
     this.average = 0;
-
+    this.number = 1;
 
   }
 
   display() {
-    this.theta = 0; //reset everytime
-    this.context.fillStyle = this.fill_color; // change the color we are using
-    this.context.strokeStyle = this.stroke_color; // change the color we are using
-    this.context.beginPath();
-    this.context.moveTo(this.x, this.y)
-    for (let i = this.x; i < this.x + this.length; i++) {
-      this.context.lineTo(i, (Math.sin(this.theta) * 5) + this.y)
-      this.context.lineTo(i, (Math.sin(this.theta) * 5) + this.y + this.yOffset)
-      this.theta += this.angularSpeed;
-    }
-    this.context.stroke(); //set the stroke
-  }
 
+    //make grid 
+    for (let r = 0; r < this.number; r++) {
+      for (let c = 0; c < this.number; c++) {
+        let linex = this.x + (r * 50);
+        let liney = this.y + (c * 50);
+
+        this.theta = 0; //reset everytime
+        this.context.fillStyle = this.fill_color; // change the color we are using
+        this.context.strokeStyle = this.stroke_color; // change the color we are using
+        this.context.beginPath();
+        this.context.moveTo(linex, liney)
+        for (let i = linex; i < linex + this.length; i++) {
+          this.context.lineTo(i, (Math.sin(this.theta) * 5) + liney)
+          this.context.lineTo(i, (Math.sin(this.theta) * 5) + liney + this.yOffset)
+          this.theta += this.angularSpeed;
+        }
+        this.context.stroke(); //set the stroke
+      }
+
+    }
+  }
   update() {
     //update freestyle
     // console.log("free style update")
@@ -50,9 +59,10 @@ class FreeStyleObj {
     //  this.stroke_color = "orange";
     // }
 
-    this.angularSpeed = this.average * 2;
-
-
+    this.angularSpeed = this.average * 50;
+    this.x = this.average * 4;
+    this.y = this.average * 4;
+    this.yOffset = this.average * 2;
     //changing to gradient 
     let gradient = this.context.createLinearGradient(0, 0, 600, 0);
     gradient.addColorStop(0, "violet");
@@ -61,6 +71,13 @@ class FreeStyleObj {
     gradient.addColorStop(0.375, "yellow");
     gradient.addColorStop(0.5, "orange");
     gradient.addColorStop(0.625, "red");
-    this.stroke_color = gradient
+    this.stroke_color = gradient;
+
+    //change number so the grid have more colums and row depending on the sound
+    this.number = this.average / 2;
+    this.linex = this.average * 20;
+    this.liney = this.average * 20;
+
+
   }
 }
