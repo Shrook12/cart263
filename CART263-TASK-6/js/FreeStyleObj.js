@@ -13,6 +13,7 @@ class FreeStyleObj {
     this.context = context;
     this.average = 0;
 
+
   }
 
   display() {
@@ -40,8 +41,26 @@ class FreeStyleObj {
   giveAverage(average) {
     this.average = average;
     //console.log(this.average)
-    this.length = this.average;
-    this.context.fillStyle = this.average;
+    this.length = this.average * 4;
 
+    // changing color
+    //this.stroke_color = "orange";
+    /** Changing colors if greater than 100*/
+    // if (this.average > 100) {
+    //  this.stroke_color = "orange";
+    // }
+
+    this.angularSpeed = this.average * 2;
+
+
+    //changing to gradient 
+    let gradient = this.context.createLinearGradient(0, 0, 600, 0);
+    gradient.addColorStop(0, "violet");
+    gradient.addColorStop(0.125, "blue");
+    gradient.addColorStop(0.25, "green");
+    gradient.addColorStop(0.375, "yellow");
+    gradient.addColorStop(0.5, "orange");
+    gradient.addColorStop(0.625, "red");
+    this.stroke_color = gradient
   }
 }
