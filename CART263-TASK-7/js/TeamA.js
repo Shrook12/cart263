@@ -28,14 +28,15 @@ export class PlanetA {
 
         });
 
-        const planetA = new THREE.Mesh(geometry, material);
-        planetA.position.set(20, 0, 0)
-        scene.add(planetA);
+        /*  const planetA = new THREE.Mesh(geometry, material);
+         planetA.position.set(20, 0, 0)
+         scene.add(planetA); */
 
-        const mesh = new THREE.Mesh(geometry, material);
-
-        sphere.castShadow = true;
-        planetA.receiveShadow = true;
+        this.mesh = new THREE.Mesh(geometry, material);
+        this.mesh.position.set(20, 0, 0)
+        this.mesh.castShadow = true;
+        this.mesh.receiveShadow = true;
+        this.scene.add(this.mesh);
         //TODO: Use castShadow and receiveShadow on the mesh and all future ones so they can cast and receive shadows.
         //TODO: Add the planet mesh to the planet group.
 
