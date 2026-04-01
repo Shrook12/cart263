@@ -11,19 +11,19 @@ export class PlanetA {
         //Create planet group
         this.group = new THREE.Group()
         const loader = new THREE.TextureLoader();
-        const texture = loader.load("./image/texture6.png");
+        const texture = loader.load("./image/planetTexture.png");
         // Create planet
 
         //STEP 1:
         //TODO: Create a planet using THREE.SphereGeometry (Radius must be between 1.5 and 2).
-        const geometry = new THREE.SphereGeometry(1.7, 32, 32);
+        const geometry = new THREE.SphereGeometry(5, 32, 32);
         //TODO: Give it a custom material using THREE.MeshStandardMaterial.
         const material = new THREE.MeshStandardMaterial({
             color: 0xC783DB,
             emissive: 0xC783DB,
             roughness: 0.5,
-            emissiveIntensity: 1.0,
-            map: texture
+            emissiveIntensity: 0.2,
+            map: texture,
 
 
         });
@@ -37,6 +37,17 @@ export class PlanetA {
         this.mesh.castShadow = true;
         this.mesh.receiveShadow = true;
         this.scene.add(this.mesh);
+
+        //trying for shadow
+        const object1 = new THREE.BoxGeometry(2, 2, 2);
+        const cubematerial = new THREE.MeshBasicMaterial({
+            color: 0x96bff
+        })
+        this.object = new THREE.Mesh(object1, cubematerial)
+        this.object.position.set(15, 2, 0)
+        this.object.castShadow = true;
+        this.object.receiveShadow = true;
+        this.scene.add(this.object)
         //TODO: Use castShadow and receiveShadow on the mesh and all future ones so they can cast and receive shadows.
         //TODO: Add the planet mesh to the planet group.
 
