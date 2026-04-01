@@ -10,13 +10,15 @@ export class PlanetA {
 
         //Create planet group
         this.group = new THREE.Group()
+
+
         const loader = new THREE.TextureLoader();
         const texture = loader.load("./image/planetTexture.png");
         // Create planet
 
         //STEP 1:
         //TODO: Create a planet using THREE.SphereGeometry (Radius must be between 1.5 and 2).
-        const geometry = new THREE.SphereGeometry(5, 32, 32);
+        const geometry = new THREE.SphereGeometry(1.9, 32, 32);
         //TODO: Give it a custom material using THREE.MeshStandardMaterial.
         const material = new THREE.MeshStandardMaterial({
             color: 0xC783DB,
@@ -28,28 +30,20 @@ export class PlanetA {
 
         });
 
-        /*  const planetA = new THREE.Mesh(geometry, material);
-         planetA.position.set(20, 0, 0)
-         scene.add(planetA); */
+        //TODO: Use castShadow and receiveShadow on the mesh and all future ones so they can cast and receive shadows.
+        //TODO: Add the planet mesh to the planet group.
 
         this.mesh = new THREE.Mesh(geometry, material);
         this.mesh.position.set(20, 0, 0)
         this.mesh.castShadow = true;
         this.mesh.receiveShadow = true;
-        this.scene.add(this.mesh);
+        this.group.add(this.mesh);
 
-        //trying for shadow
-        const object1 = new THREE.BoxGeometry(2, 2, 2);
-        const cubematerial = new THREE.MeshBasicMaterial({
-            color: 0x96bff
-        })
-        this.object = new THREE.Mesh(object1, cubematerial)
-        this.object.position.set(15, 2, 0)
-        this.object.castShadow = true;
-        this.object.receiveShadow = true;
-        this.scene.add(this.object)
-        //TODO: Use castShadow and receiveShadow on the mesh and all future ones so they can cast and receive shadows.
-        //TODO: Add the planet mesh to the planet group.
+        /** LINES TO ADD TO CAST AND RECIVE SHADOWS FOR FUTURE MESH CREATED JUST CHANGE OBJECT TO THE NAME OF YOUR MESH
+         *   //this.object.castShadow = true;
+            //this.object.receiveShadow = true;
+         */
+
 
         //STEP 2: 
         //TODO: Add from 1 to 3 orbiting moons to the planet group. 
