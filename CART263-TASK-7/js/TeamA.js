@@ -13,6 +13,7 @@ export class PlanetA {
         const loader = new THREE.TextureLoader();
         const texture = loader.load("./image/texture6.png");
         // Create planet
+
         //STEP 1:
         //TODO: Create a planet using THREE.SphereGeometry (Radius must be between 1.5 and 2).
         const geometry = new THREE.SphereGeometry(1.7, 32, 32);
@@ -31,6 +32,7 @@ export class PlanetA {
         planetA.position.set(20, 0, 0)
         scene.add(planetA);
 
+        const mesh = new THREE.Mesh(geometry, material);
 
         sphere.castShadow = true;
         planetA.receiveShadow = true;
