@@ -1,5 +1,10 @@
 import * as THREE from "three";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js"
+import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js"
+
+
+//gltf loader
+const gltfLoader = new GLTFLoader();
 
 //scene
 const scene = new THREE.Scene()
@@ -24,7 +29,18 @@ window.addEventListener("resize", function () {
     renderer.setSize(window.innerWidth, innerHeight)
 })
 
+
 const controls = new OrbitControls(camera, canvas)
+
+
+let spaceship = null;
+try {
+    spaceship = await gltfLoader.loadAsync("./models/spaceship2.glb");
+    scene.add(spaceship.scene);
+    console.log(spaceshipModel)
+} catch (error) {
+    console.log(error.message)
+}
 
 window.requestAnimationFrame(animate);
 
