@@ -21,7 +21,8 @@ camera.position.set(0, 2, 3)
 const canvas = document.querySelector("canvas#three-ex")
 //renderer to visualize in 3d
 const renderer = new THREE.WebGLRenderer({
-    canvas: canvas
+    canvas: canvas,
+    antialias: true
 })
 renderer.setSize(window.innerWidth, window.innerHeight)
 
@@ -45,8 +46,11 @@ let spaceship = null;
 let monster = null;
 let metal = null;
 let tree = null;
-
 let cube = null;
+let spike = null;
+let screw = null;
+let chair = null;
+let creature = null;
 
 try {
     spaceship = await gltfLoader.loadAsync("./models/spaceship2.glb");
@@ -55,20 +59,39 @@ try {
     tree = await gltfLoader.loadAsync("./models/tree.glb");
     monster = await gltfLoader.loadAsync("./models/monster1.glb");
 
-    cube = await gltfLoader.loadAsync("./models/cube.glb")
+    cube = await gltfLoader.loadAsync("./models/cube.glb");
+    spike = await gltfLoader.loadAsync("./models/spike.glb");
+    screw = await gltfLoader.loadAsync("./models/screw.glb");
+    chair = await gltfLoader.loadAsync("./models/chair.glb");
+    creature = await gltfLoader.loadAsync("./models/creature.glb");
+
     scene.add(spaceship.scene);
 
     metal.scene.position.set(0, 0, -10)
     scene.add(metal.scene);
+
+
     tree.scene.position.set(0, 0, -5)
-    tree.scene.scale.set(100, 100, 100);
     scene.add(tree.scene);
 
 
     cube.scene.position.set(0, 0, 0)
     scene.add(cube.scene);
+
     monster.scene.position.set(0, 0, -10)
     scene.add(monster.scene);
+
+    spike.scene.position.set(0, 0, -5)
+    scene.add(spike.scene);
+
+    screw.scene.position.set(0, 0, -15)
+    scene.add(screw.scene);
+
+    chair.scene.position.set(0, 0, -15)
+    scene.add(chair.scene);
+
+    creature.scene.position.set(0, 0, -15)
+    scene.add(creature.scene);
 
 } catch (error) {
     console.log(error.message)
