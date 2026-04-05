@@ -67,32 +67,48 @@ try {
     chair = await gltfLoader.loadAsync("./models/chair.glb");
     creature = await gltfLoader.loadAsync("./models/creature.glb");
 
+    spaceship.scene.rotation.x = 0;
+    spaceship.scene.rotation.y = Math.PI;
     scene.add(spaceship.scene);
+    camera.position.set(0, 2, 5);
+    camera.lookAt(0, 0, 0);
+    spaceship.scene.add(camera);
 
-    metal.scene.position.set(0, 0, -10)
+
+    metal.scene.position.z = (Math.random() - 0.5) * 100;
+    metal.scene.position.x = (Math.random() - 0.5) * 100;
     scene.add(metal.scene);
 
 
-    tree.scene.position.set(0, 0, -5)
+    tree.scene.position.z = (Math.random() - 0.5) * 100;
+    tree.scene.position.x = (Math.random() - 0.5) * 100;
     scene.add(tree.scene);
 
 
-    cube.scene.position.set(0, 0, 0)
+    cube.scene.position.z = (Math.random() - 0.5) * 100;
+    cube.scene.position.x = (Math.random() - 0.5) * 100;
     scene.add(cube.scene);
 
-    monster.scene.position.set(0, 0, -10)
+    monster.scene.position.z = (Math.random() - 0.5) * 100;
+    monster.scene.position.x = (Math.random() - 0.5) * 100;
     scene.add(monster.scene);
 
-    spike.scene.position.set(0, 0, -5)
+
+    spike.scene.position.z = (Math.random() - 0.5) * 100;
+    spike.scene.position.x = (Math.random() - 0.5) * 100;
     scene.add(spike.scene);
 
-    screw.scene.position.set(0, 0, -15)
+    screw.scene.position.z = (Math.random() - 0.5) * 100;
+    screw.scene.position.x = (Math.random() - 0.5) * 100;
     scene.add(screw.scene);
 
-    chair.scene.position.set(0, 0, -15)
+    chair.scene.position.z = (Math.random() - 0.5) * 100;
+    chair.scene.position.x = (Math.random() - 0.5) * 100;
     scene.add(chair.scene);
 
-    creature.scene.position.set(0, 0, -15)
+
+    creature.scene.position.z = (Math.random() - 0.5) * 100;
+    creature.scene.position.x = (Math.random() - 0.5) * 100;
     scene.add(creature.scene);
 
 } catch (error) {
@@ -100,7 +116,8 @@ try {
 }
 
 const keys = {
-    ArrowUp: false
+    ArrowUp: false,
+    ArrowDown: false
 }
 //key event
 window.addEventListener("keydown", function (event) {
@@ -116,15 +133,30 @@ window.addEventListener("keyup", function (event) {
     }
 })
 
+window.addEventListener("keydown", function (event) {
+    if (event.key === "ArrowDown") {
+        keys.ArrowDown = true;
+
+    }
+});
+
+window.addEventListener("keyup", function (event) {
+    if (event.key === "ArrowDown") {
+        keys.ArrowDown = false;
+    }
+})
+
 //animation
 window.requestAnimationFrame(animate);
 
 function animate(timer) {
     controls.update();
     if (keys.ArrowUp === true) {
+        spaceship.scene.position.z += 1;
+    }
+    if (keys.ArrowDown === true) {
         spaceship.scene.position.z -= 1;
     }
-
     renderer.render(scene, camera);
     window.requestAnimationFrame(animate);
 }
