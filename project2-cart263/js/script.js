@@ -19,6 +19,7 @@ camera.position.set(0, 2, 3)
 
 //access the canvas
 const canvas = document.querySelector("canvas#three-ex")
+
 //renderer to visualize in 3d
 const renderer = new THREE.WebGLRenderer({
     canvas: canvas,
@@ -32,16 +33,17 @@ window.addEventListener("resize", function () {
     renderer.setSize(window.innerWidth, innerHeight)
 })
 
-
+//controls
 const controls = new OrbitControls(camera, canvas)
 
+//light
 const ambientLight = new THREE.AmbientLight()
 scene.add(ambientLight)
 
 ambientLight.color = new THREE.Color(0xff0000)
 ambientLight.intensity = .5;
 
-
+//models
 let spaceship = null;
 let monster = null;
 let metal = null;
@@ -97,10 +99,32 @@ try {
     console.log(error.message)
 }
 
+const keys = {
+    ArrowUp: false
+}
+//key event
+window.addEventListener("keydown", function (event) {
+    if (event.key === "ArrowUp") {
+        keys.ArrowUp = true;
+        //spaceship.scene.position.z -= 10;
+    }
+});
+
+window.addEventListener("keyup", function (event) {
+    if (event.key === "ArrowUp") {
+        keys.ArrowUp = false;
+    }
+})
+
+//animation
 window.requestAnimationFrame(animate);
 
 function animate(timer) {
     controls.update();
+    if (keys.ArrowUp === true) {
+        spaceship.scene.position.z -= 1;
+    }
+
     renderer.render(scene, camera);
     window.requestAnimationFrame(animate);
 }
