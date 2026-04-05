@@ -74,42 +74,48 @@ try {
     camera.lookAt(0, 0, 0);
     spaceship.scene.add(camera);
 
+    const models = [tree.scene, metal.scene, cube.scene, monster.scene, spike.scene, screw.scene, chair.scene, creature.scene]
 
-    metal.scene.position.z = (Math.random() - 0.5) * 100;
-    metal.scene.position.x = (Math.random() - 0.5) * 100;
-    scene.add(metal.scene);
-
-
-    tree.scene.position.z = (Math.random() - 0.5) * 100;
-    tree.scene.position.x = (Math.random() - 0.5) * 100;
-    scene.add(tree.scene);
-
-
-    cube.scene.position.z = (Math.random() - 0.5) * 100;
-    cube.scene.position.x = (Math.random() - 0.5) * 100;
-    scene.add(cube.scene);
-
-    monster.scene.position.z = (Math.random() - 0.5) * 100;
-    monster.scene.position.x = (Math.random() - 0.5) * 100;
-    scene.add(monster.scene);
-
-
-    spike.scene.position.z = (Math.random() - 0.5) * 100;
-    spike.scene.position.x = (Math.random() - 0.5) * 100;
-    scene.add(spike.scene);
-
-    screw.scene.position.z = (Math.random() - 0.5) * 100;
-    screw.scene.position.x = (Math.random() - 0.5) * 100;
-    scene.add(screw.scene);
-
-    chair.scene.position.z = (Math.random() - 0.5) * 100;
-    chair.scene.position.x = (Math.random() - 0.5) * 100;
-    scene.add(chair.scene);
-
-
-    creature.scene.position.z = (Math.random() - 0.5) * 100;
-    creature.scene.position.x = (Math.random() - 0.5) * 100;
-    scene.add(creature.scene);
+    for (const model of models) {
+        model.position.x = (Math.random() - 0.5) * 100;
+        model.position.z = (Math.random() - 0.5) * 100;
+        scene.add(model);
+    }
+    /*     metal.scene.position.z = (Math.random() - 0.5) * 100;
+        metal.scene.position.x = (Math.random() - 0.5) * 100;
+        scene.add(metal.scene);
+    
+    
+        tree.scene.position.z = (Math.random() - 0.5) * 100;
+        tree.scene.position.x = (Math.random() - 0.5) * 100;
+        scene.add(tree.scene);
+    
+    
+        cube.scene.position.z = (Math.random() - 0.5) * 100;
+        cube.scene.position.x = (Math.random() - 0.5) * 100;
+        scene.add(cube.scene);
+    
+        monster.scene.position.z = (Math.random() - 0.5) * 100;
+        monster.scene.position.x = (Math.random() - 0.5) * 100;
+        scene.add(monster.scene);
+    
+    
+        spike.scene.position.z = (Math.random() - 0.5) * 100;
+        spike.scene.position.x = (Math.random() - 0.5) * 100;
+        scene.add(spike.scene);
+    
+        screw.scene.position.z = (Math.random() - 0.5) * 100;
+        screw.scene.position.x = (Math.random() - 0.5) * 100;
+        scene.add(screw.scene);
+    
+        chair.scene.position.z = (Math.random() - 0.5) * 100;
+        chair.scene.position.x = (Math.random() - 0.5) * 100;
+        scene.add(chair.scene);
+    
+    
+        creature.scene.position.z = (Math.random() - 0.5) * 100;
+        creature.scene.position.x = (Math.random() - 0.5) * 100;
+        scene.add(creature.scene); */
 
 } catch (error) {
     console.log(error.message)
@@ -157,6 +163,7 @@ function animate(timer) {
     if (keys.ArrowDown === true) {
         spaceship.scene.position.z -= 1;
     }
+
     renderer.render(scene, camera);
     window.requestAnimationFrame(animate);
 }
