@@ -10,8 +10,20 @@ const gltfLoader = new GLTFLoader();
 const scene = new THREE.Scene()
 scene.add(new THREE.AxesHelper())
 
-
-
+//add background
+//I will change this in the future this is just to try
+const loader = new THREE.CubeTextureLoader();
+loader.setPath("./textures/");
+loader.load([
+    "spiral.jpg", "spiral.jpg",
+    "spiral.jpg", "spiral.jpg",
+    "spiral.jpg", "spiral.jpg"
+], function (texture) {
+    scene.background = texture;
+})
+scene.backgroundBlurriness = 0.3;
+scene.backgroundIntensity = 0.5;
+scene.background = new THREE.Color(0x111111)
 //camera
 const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight)
 scene.add(camera)
@@ -120,6 +132,8 @@ try {
 } catch (error) {
     console.log(error.message)
 }
+
+const raycaster = new THREE.Raycaster()
 
 const keys = {
     ArrowUp: false,
