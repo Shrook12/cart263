@@ -182,6 +182,18 @@ window.addEventListener("mousemove", function (event) {
     mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
     mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
 })
+
+window.addEventListener("click", function () {
+    const intersects = raycaster.intersectObjects(models, true);
+
+    if (intersects.length > 0) {
+        const target = intersects[0].object.userData.parentModel;
+
+        if (target) {
+            openPanel(target);
+        }
+    }
+})
 //animation
 window.requestAnimationFrame(animate);
 
@@ -223,4 +235,15 @@ function animate(timer) {
 
     renderer.render(scene, camera);
     window.requestAnimationFrame(animate);
+}
+
+function openPanel(model) {
+    const geometry = new THREE.BoxGeometry(2, 1, 0.1);
+    const material = new THREE.MeshStandardMaterial({
+        color: 0x333333
+    });
+    const panel = new THREE.Mesh(geometry, material);
+
+    panel.position.set();
+    scene.add(panel);
 }
