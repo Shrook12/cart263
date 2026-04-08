@@ -9,7 +9,7 @@ const gltfLoader = new GLTFLoader();
 //scene
 const scene = new THREE.Scene()
 scene.add(new THREE.AxesHelper())
-
+let models = [];
 //add background
 //I will change this in the future this is just to try
 const loader = new THREE.CubeTextureLoader();
@@ -86,11 +86,20 @@ try {
     camera.lookAt(0, 0, 0);
     spaceship.scene.add(camera);
 
-    const models = [tree.scene, metal.scene, cube.scene, monster.scene, spike.scene, screw.scene, chair.scene, creature.scene]
+
+
+    models = [tree.scene, metal.scene, cube.scene, monster.scene, spike.scene, screw.scene, chair.scene, creature.scene]
 
     for (const model of models) {
         model.position.x = (Math.random() - 0.5) * 100;
         model.position.z = (Math.random() - 0.5) * 100;
+
+        model.traverse(function (child) {
+            //verify that the object is a mesh
+            if (child.isMesh) {
+                child.userData.parentModel = model;
+            }
+        });
         scene.add(model);
     }
     /*     metal.scene.position.z = (Math.random() - 0.5) * 100;
@@ -133,7 +142,7 @@ try {
     console.log(error.message)
 }
 
-const raycaster = new THREE.Raycaster()
+
 
 const keys = {
     ArrowUp: false,
@@ -165,7 +174,14 @@ window.addEventListener("keyup", function (event) {
         keys.ArrowDown = false;
     }
 })
+const raycaster = new THREE.Raycaster();
+const mouse = new THREE.Vector2();
 
+
+window.addEventListener("mousemove", function (event) {
+    mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+    mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+})
 //animation
 window.requestAnimationFrame(animate);
 
@@ -177,6 +193,33 @@ function animate(timer) {
     if (keys.ArrowDown === true) {
         spaceship.scene.position.z -= 1;
     }
+    raycaster.setFromCamera(mouse, camera);
+
+    for (let i = 0; i < models.length; i++) {
+        models[i].scale.lerp(new THREE.Vector3(1, 1, 1), 0.1);
+        models[i].traverse(function (node) {
+            if (node.isMesh) {
+                node.material.emissive.setHex(0x000000);
+            }
+        });
+    }
+
+    const intersects = raycaster.intersectObjects(models, true)
+
+    if (intersects.length > 0) {
+        const target = intersects[0].object.userData.parentModel;
+
+        if (target) {
+            target.scale.lerp(new THREE.Vector3(1.5, 1.5, 1.5), 0.1);
+
+            target.traverse(function (node) {
+                if (node.isMesh) {
+                    node.material.emissive.setHex(0x444444);
+                }
+            })
+        }
+    }
+
 
     renderer.render(scene, camera);
     window.requestAnimationFrame(animate);
