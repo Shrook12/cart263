@@ -186,11 +186,17 @@ window.addEventListener("mousemove", function (event) {
 window.addEventListener("click", function () {
     const intersects = raycaster.intersectObjects(models, true);
 
+    let panel = document.getElementById("panel");
+
     if (intersects.length > 0) {
         const target = intersects[0].object.userData.parentModel;
 
         if (target) {
-            openPanel(target);
+            // openPanel(target);
+            document.getElementById("panel-title").innerText = "";
+            document.getElementById("description").innerText = "";
+
+            panel.style.display = "block";
         }
     }
 })
@@ -237,7 +243,7 @@ function animate(timer) {
     window.requestAnimationFrame(animate);
 }
 
-function openPanel(model) {
+/* function openPanel(model) {
     const geometry = new THREE.BoxGeometry(2, 1, 0.1);
     const material = new THREE.MeshStandardMaterial({
         color: 0x333333
@@ -246,4 +252,4 @@ function openPanel(model) {
 
     panel.position.set();
     scene.add(panel);
-}
+} */
