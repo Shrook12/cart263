@@ -1,6 +1,7 @@
 import * as THREE from "three";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js"
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js"
+//import { TextGeometry } from 'three/addons/geometries/TextGeometry.js';
 
 
 //gltf loader
@@ -55,6 +56,18 @@ scene.add(ambientLight)
 ambientLight.color = new THREE.Color(0xff0000)
 ambientLight.intensity = .5;
 
+
+/* const geometry = new TextGeometry('Hello three.js!', {
+    size: 80,
+    depth: 5,
+    curveSegments: 12
+});
+
+const material = new THREE.MeshStandardMaterial({ color: 0xff0000 });
+const mesh = new THREE.Mesh(geometry, material);
+scene.add(mesh); */
+
+
 //models
 let spaceship = null;
 let monster = null;
@@ -101,6 +114,27 @@ try {
             }
         });
         scene.add(model);
+
+        const legend = {
+            tree: { title: "THE ABNORMAL TREE", text: "This is an abnormal tree that grew up in another universe(it's what scientists believe). After the biggest failure ever of creating a machine to travel through different universes. Someone tried to travel with it and we found this tree after and the person never came back again. Many people believe that the personne was actually transformed into this tree and other believes that they changed place he went to another universe and the tree came here instead " },
+            metal: { title: "THE HISTORIC METAL", text: "" },
+            cube: { title: "", text: "" },
+            monster: { title: "", text: "" },
+            spike: { title: "THE DELICIOUS CANDY", text: "In 19380, 1000 years ago, was invented this candy. I was a huge trend at this time and it was called: The Venus Candy. Why because it was invented in Venus in the north pole by an alien Mr.Cactus. He was a popular chef and this was his most popular food. I was a trend for 5 years but then everyone forgot about it as if it was never created and now 10 years later did not exist anymore. Even though it didn't really taste good and you would probably suffer of blood loss and a destroyed mouth after eating this. Millions of people just bought for trend and to be popular on social media." },
+            screw: { title: "", text: "" },
+            chair: { title: "THE MOST EXPENSIVE CHAIR", text: "In the year 19880, 500 years ago, this chair was a really popular chair. It was and still seen as the most confortable chair ever and good for back posture. Made with high quality it was sold with 2 000 000 000$ to Cantaloupe LeGrand." },
+            creature: { title: "THE ALIEN PENGUIN", text: "This is named an alien penguin. It's an alien from Jupite. It became sort of a legend used in story after it disappearence because alien pollution. " }
+
+        }
+
+        tree.scene.userData.info = legend.tree;
+        metal.scene.userData.info = legend.metal;
+        cube.scene.userData.info = legend.cube;
+        monster.scene.userData.info = legend.monster;
+        spike.scene.userData.info = legend.spike;
+        screw.scene.userData.info = legend.screw;
+        chair.scene.userData.info = legend.chair;
+        creature.scene.userData.info = legend.creature;
     }
     /*     metal.scene.position.z = (Math.random() - 0.5) * 100;
         metal.scene.position.x = (Math.random() - 0.5) * 100;
@@ -193,10 +227,12 @@ window.addEventListener("click", function () {
 
         if (target) {
             // openPanel(target);
-            document.getElementById("panel-title").innerText = "";
-            document.getElementById("description").innerText = "";
+            document.getElementById("panel-title").innerText = target.userData.info.title;
+            document.getElementById("description").innerText = target.userData.info.text;
 
             panel.style.display = "block";
+
+
         }
     }
 })
