@@ -47,7 +47,7 @@ window.addEventListener("resize", function () {
 })
 
 //controls
-const controls = new OrbitControls(camera, canvas)
+//const controls = new OrbitControls(camera, canvas)
 
 //light
 const ambientLight = new THREE.AmbientLight()
@@ -180,7 +180,8 @@ try {
 
 const keys = {
     ArrowUp: false,
-    ArrowDown: false
+    ArrowDown: false,
+    ArrowRight: false,
 }
 //key event
 window.addEventListener("keydown", function (event) {
@@ -206,6 +207,18 @@ window.addEventListener("keydown", function (event) {
 window.addEventListener("keyup", function (event) {
     if (event.key === "ArrowDown") {
         keys.ArrowDown = false;
+    }
+})
+window.addEventListener("keydown", function (event) {
+    if (event.key === "ArrowRight") {
+        keys.ArrowRight = true;
+
+    }
+});
+
+window.addEventListener("keyup", function (event) {
+    if (event.key === "ArrowRight") {
+        keys.ArrowRight = false;
     }
 })
 const raycaster = new THREE.Raycaster();
@@ -240,12 +253,15 @@ window.addEventListener("click", function () {
 window.requestAnimationFrame(animate);
 
 function animate(timer) {
-    controls.update();
+    // controls.update();
     if (keys.ArrowUp === true) {
         spaceship.scene.position.z += 1;
     }
     if (keys.ArrowDown === true) {
         spaceship.scene.position.z -= 1;
+    }
+    if (keys.ArrowRight === true) {
+        spaceship.scene.position.x += 1;
     }
     raycaster.setFromCamera(mouse, camera);
 
