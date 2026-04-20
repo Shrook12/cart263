@@ -1,8 +1,8 @@
 import * as THREE from "three";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js"
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js"
-//import { TextGeometry } from 'three/addons/geometries/TextGeometry.js';
-
+import { TextGeometry } from 'three/addons/geometries/TextGeometry.js';
+import { FontLoader } from 'three/addons/loaders/FontLoader.js';
 
 //gltf loader
 const gltfLoader = new GLTFLoader();
@@ -56,16 +56,39 @@ scene.add(ambientLight)
 ambientLight.color = new THREE.Color(0xff0000)
 ambientLight.intensity = .5;
 
+const loaderfont = new FontLoader();
+const font = await loaderfont.loadAsync('./fonts/creepster_regular.json');
 
-/* const geometry = new TextGeometry('Hello three.js!', {
-    size: 80,
-    depth: 5,
-    curveSegments: 12
+
+const geometry1 = new TextGeometry('WECLOME TO THE PORTAL', {
+    font: font,
+    size: 4,
+    depth: 3
+
 });
 
-const material = new THREE.MeshStandardMaterial({ color: 0xff0000 });
-const mesh = new THREE.Mesh(geometry, material);
-scene.add(mesh); */
+const material1 = new THREE.MeshStandardMaterial({ color: 0xff0000 });
+const mesh1 = new THREE.Mesh(geometry1, material1);
+mesh1.rotation.y = Math.PI;
+mesh1.position.y = 6;
+mesh1.position.z = 40;
+mesh1.position.x = 20;
+
+
+const geometry2 = new TextGeometry('OF WEIRD OBJECTS', {
+    font: font,
+    size: 4,
+    depth: 3
+
+});
+
+const material2 = new THREE.MeshStandardMaterial({ color: 0xff0000 });
+const mesh2 = new THREE.Mesh(geometry2, material2);
+mesh2.rotation.y = Math.PI;
+mesh2.position.y = 2;
+mesh2.position.z = 50;
+
+scene.add(mesh1, mesh2);
 
 
 //models
@@ -104,8 +127,8 @@ try {
     models = [tree.scene, metal.scene, cube.scene, monster.scene, spike.scene, screw.scene, chair.scene, creature.scene]
 
     for (const model of models) {
-        model.position.x = (Math.random() - 0.5) * 100;
-        model.position.z = (Math.random() - 0.5) * 100;
+        model.position.x = (Math.random() - 0.5) * 200;
+        model.position.z = Math.random() * 400;
 
         model.traverse(function (child) {
             //verify that the object is a mesh
