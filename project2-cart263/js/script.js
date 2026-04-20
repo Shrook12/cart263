@@ -221,6 +221,19 @@ window.addEventListener("keyup", function (event) {
         keys.ArrowRight = false;
     }
 })
+
+window.addEventListener("keydown", function (event) {
+    if (event.key === "ArrowLeft") {
+        keys.ArrowLeft = true;
+
+    }
+});
+
+window.addEventListener("keyup", function (event) {
+    if (event.key === "ArrowLeft") {
+        keys.ArrowLeft = false;
+    }
+})
 const raycaster = new THREE.Raycaster();
 const mouse = new THREE.Vector2();
 
@@ -262,6 +275,9 @@ function animate(timer) {
     }
     if (keys.ArrowRight === true) {
         spaceship.scene.position.x += 1;
+    }
+    if (keys.ArrowLeft === true) {
+        spaceship.scene.position.x -= 1;
     }
     raycaster.setFromCamera(mouse, camera);
 
