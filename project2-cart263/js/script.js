@@ -285,10 +285,17 @@ window.addEventListener("click", function () {
         }
     }
 })
+
+const clock = new THREE.Clock();
 //animation
 window.requestAnimationFrame(animate);
 
-function animate(timer) {
+function animate() {
+    for (const model of models) {
+        model.rotation.y += 0.01
+        model.position.x += Math.sin(clock.getElapsedTime()) * 0.1;
+        model.position.z += Math.sin(clock.getElapsedTime()) * 0.05 + 0.05;
+    }
     // controls.update();
     if (keys.ArrowUp === true) {
         spaceship.scene.position.z += 1;
