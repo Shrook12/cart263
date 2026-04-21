@@ -11,6 +11,8 @@ const gltfLoader = new GLTFLoader();
 const scene = new THREE.Scene()
 scene.add(new THREE.AxesHelper())
 let models = [];
+
+
 //add background
 //I will change this in the future this is just to try
 const loader = new THREE.CubeTextureLoader();
@@ -25,6 +27,7 @@ loader.load([
 scene.backgroundBlurriness = 0.3;
 scene.backgroundIntensity = 0.5;
 scene.background = new THREE.Color(0x111111)
+scene.fog = new THREE.FogExp2(0x120021, 0.005);
 //camera
 const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight)
 scene.add(camera)
@@ -257,6 +260,8 @@ window.addEventListener("keyup", function (event) {
         keys.ArrowLeft = false;
     }
 })
+
+
 const raycaster = new THREE.Raycaster();
 const mouse = new THREE.Vector2();
 
@@ -265,6 +270,25 @@ window.addEventListener("mousemove", function (event) {
     mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
     mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
 })
+
+
+
+const miniCanvas = document.getElementById('object');
+const miniRenderer = new THREE.WebGLRenderer({
+    canvas: miniCanvas
+
+});
+miniRenderer.setSize(200, 200);
+
+const miniScene = new THREE.Scene();
+miniScene.background = new THREE.Color(0x000000);
+const miniCamera = new THREE.PerspectiveCamera(45, 1, 0.1, 100);
+miniCamera.position.z = 5;
+
+const light = new THREE.DirectionalLight(0xffffff, 2);
+light.position.set(1, 1, 2);
+miniScene.add(light, new THREE.AmbientLight(0xffffff, 0.5));
+let previewModel = null;
 
 window.addEventListener("click", function () {
     const intersects = raycaster.intersectObjects(models, true);
@@ -275,11 +299,15 @@ window.addEventListener("click", function () {
         const target = intersects[0].object.userData.parentModel;
 
         if (target) {
+
+
             // openPanel(target);
             document.getElementById("panel-title").innerText = target.userData.info.title;
             document.getElementById("description").innerText = target.userData.info.text;
 
             panel.style.display = "block";
+
+
 
 
         }
@@ -291,6 +319,7 @@ const clock = new THREE.Clock();
 window.requestAnimationFrame(animate);
 
 function animate() {
+
     for (const model of models) {
         model.rotation.y += 0.01
         model.position.x += Math.sin(clock.getElapsedTime()) * 0.1;
@@ -304,10 +333,10 @@ function animate() {
         spaceship.scene.position.z -= 1;
     }
     if (keys.ArrowRight === true) {
-        spaceship.scene.position.x += 1;
+        spaceship.scene.position.x -= 1;
     }
     if (keys.ArrowLeft === true) {
-        spaceship.scene.position.x -= 1;
+        spaceship.scene.position.x += 1;
     }
     raycaster.setFromCamera(mouse, camera);
 
@@ -326,7 +355,7 @@ function animate() {
         const target = intersects[0].object.userData.parentModel;
 
         if (target) {
-            target.scale.lerp(new THREE.Vector3(1.5, 1.5, 1.5), 0.1);
+            target.scale.lerp(new THREE.Vector3(2, 2, 2), 0.1);
 
             target.traverse(function (node) {
                 if (node.isMesh) {
@@ -338,6 +367,9 @@ function animate() {
 
 
     renderer.render(scene, camera);
+    if (panel.style.display === "block") {
+        miniRenderer.render(miniScene, miniCamera);
+    }
     window.requestAnimationFrame(animate);
 }
 
