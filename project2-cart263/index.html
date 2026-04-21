@@ -17,10 +17,10 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 40vw;
+            width: 50vw;
             height: 40vh;
             color: black;
-            padding: 150px;
+            padding: 200px;
             font-family: Arial, Helvetica, sans-serif;
             text-align: center;
             display: none;
@@ -28,6 +28,32 @@
             background-image: url(models/3d.png);
             background-size: cover;
             background-repeat: no-repeat;
+        }
+
+        .content {
+            display: flex;
+            align-items: center;
+            height: 100%;
+            width: 100%;
+        }
+
+        .left {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+        }
+
+        .right {
+            flex: 1;
+            text-align: left;
+            padding-left: 20px;
+        }
+
+        button {
+            position: absolute;
+
+            right: 30px;
+            background-color: transparent;
         }
 
         #panel-title {
@@ -76,10 +102,16 @@
     <div style="cursor:pointer; background: orange; width:max-content; padding:2px;" id='play_button'>PLAY</div> -->
 
     <div id="panel">
-        <h1 id="panel-title"></h1>
-        <canvas id="object" width="100" height="100"></canvas>
-        <p id="description"></p>
         <button onclick="document.getElementById('panel').style.display='none'">x</button>
+        <div class="content">
+            <div class="left">
+                <canvas id="object" width="100" height="100"></canvas>
+            </div>
+            <div class="right">
+                <h1 id="panel-title"></h1>
+                <p id="description"></p>
+            </div>
+        </div>
 
     </div>
     <div id="instructions">
@@ -89,7 +121,7 @@
         <p>3-Becareful because the objects keeps moving constantly but they don't move fast the ship is more faster</p>
         <p>4-There is no winning or losing in this project this is just an experimental, explorative and 100% for fun.
         </p>
-        <p>Press on "S" to start!</p>
+        <p>Press on "s" to start!</p>
 
     </div>
 </body>

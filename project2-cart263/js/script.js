@@ -1,5 +1,5 @@
 import * as THREE from "three";
-import { OrbitControls } from "three/addons/controls/OrbitControls.js"
+//import { OrbitControls } from "three/addons/controls/OrbitControls.js"
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js"
 import { TextGeometry } from 'three/addons/geometries/TextGeometry.js';
 import { FontLoader } from 'three/addons/loaders/FontLoader.js';
@@ -15,8 +15,8 @@ let started = false;
 
 
 //add background
-//I will change this in the future this is just to try
 const loader = new THREE.CubeTextureLoader();
+//add a background image for each faces
 loader.setPath("./textures/");
 loader.load([
     "spiral.jpg", "spiral.jpg",
@@ -25,10 +25,14 @@ loader.load([
 ], function (texture) {
     scene.background = texture;
 })
+//make the background blur
 scene.backgroundBlurriness = 0.3;
 scene.backgroundIntensity = 0.5;
 scene.background = new THREE.Color(0x111111)
+
+//add fog
 scene.fog = new THREE.FogExp2(0x120021, 0.005);
+
 //camera
 const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight)
 scene.add(camera)
@@ -44,6 +48,7 @@ const renderer = new THREE.WebGLRenderer({
 })
 renderer.setSize(window.innerWidth, window.innerHeight)
 
+//to resize everything when the window is smaller or bigger
 window.addEventListener("resize", function () {
     camera.aspect = window.innerWidth / window.innerHeight
     camera.updateProjectionMatrix()
@@ -60,6 +65,8 @@ scene.add(ambientLight)
 ambientLight.color = new THREE.Color(0xff0000)
 ambientLight.intensity = .5;
 
+//add 3d text
+//load font
 const loaderfont = new FontLoader();
 const font = await loaderfont.loadAsync('./fonts/creepster_regular.json');
 
@@ -73,7 +80,9 @@ const geometry1 = new TextGeometry('WECLOME TO THE PORTAL', {
 
 const material1 = new THREE.MeshStandardMaterial({ color: 0xff0000 });
 const mesh1 = new THREE.Mesh(geometry1, material1);
+//text rotation because it was flipped
 mesh1.rotation.y = Math.PI;
+//text position
 mesh1.position.y = 6;
 mesh1.position.z = 40;
 mesh1.position.x = 20;
@@ -88,7 +97,9 @@ const geometry2 = new TextGeometry('OF WEIRD OBJECTS', {
 
 const material2 = new THREE.MeshStandardMaterial({ color: 0xff0000 });
 const mesh2 = new THREE.Mesh(geometry2, material2);
+//text rotation because it was flipped
 mesh2.rotation.y = Math.PI;
+//text position
 mesh2.position.y = 2;
 mesh2.position.z = 50;
 
@@ -107,6 +118,7 @@ let chair = null;
 let creature = null;
 
 try {
+    //loading models
     spaceship = await gltfLoader.loadAsync("./models/spaceship2.glb");
 
     metal = await gltfLoader.loadAsync("./models/metal.glb");
@@ -119,21 +131,25 @@ try {
     chair = await gltfLoader.loadAsync("./models/chair.glb");
     creature = await gltfLoader.loadAsync("./models/creature.glb");
 
+
     spaceship.scene.rotation.x = 0;
     spaceship.scene.rotation.y = Math.PI;
     scene.add(spaceship.scene);
+    //to make camera look at the spaceship view
     camera.position.set(0, 2, 5);
     camera.lookAt(0, 0, 0);
     spaceship.scene.add(camera);
 
 
-
+    //array of all the models
     models = [tree.scene, metal.scene, cube.scene, monster.scene, spike.scene, screw.scene, chair.scene, creature.scene]
 
     for (const model of models) {
+        //to make the position at random places
         model.position.x = (Math.random() - 0.5) * 200;
         model.position.z = Math.random() * 400;
 
+        //too see all the pieces in a model
         model.traverse(function (child) {
             //verify that the object is a mesh
             if (child.isMesh) {
@@ -142,6 +158,7 @@ try {
         });
         scene.add(model);
 
+        //this is for text section
         const legend = {
             tree: { title: "THE ABNORMAL TREE", text: "This is an abnormal tree that grew up in another universe(it's what scientists believe). After the biggest failure ever of creating a machine to travel through different universes. Someone tried to travel with it and we found this tree after and the person never came back again. Many people believe that the personne was actually transformed into this tree and other believes that they changed place he went to another universe and the tree came here instead " },
             metal: { title: "THE HISTORIC METAL", text: "" },
@@ -154,6 +171,7 @@ try {
 
         }
 
+        // connect text with the model
         tree.scene.userData.info = legend.tree;
         metal.scene.userData.info = legend.metal;
         cube.scene.userData.info = legend.cube;
@@ -204,112 +222,131 @@ try {
 }
 
 
-
+//keys false, not clicked
 const keys = {
     ArrowUp: false,
     ArrowDown: false,
     ArrowRight: false,
+    ArrowLeft: false
 }
 //key event
+/**Arrow key up */
 window.addEventListener("keydown", function (event) {
+    //become true when pressed
     if (event.key === "ArrowUp") {
         keys.ArrowUp = true;
         //spaceship.scene.position.z -= 10;
     }
 });
 
+//become false when it's not clicked anymore
 window.addEventListener("keyup", function (event) {
     if (event.key === "ArrowUp") {
         keys.ArrowUp = false;
     }
 })
 
+/**Arrow key Down */
 window.addEventListener("keydown", function (event) {
+    //become true when pressed
     if (event.key === "ArrowDown") {
         keys.ArrowDown = true;
 
     }
 });
-
+//become false when it's not clicked anymore
 window.addEventListener("keyup", function (event) {
     if (event.key === "ArrowDown") {
         keys.ArrowDown = false;
     }
 })
+/**Arrow key Right */
 window.addEventListener("keydown", function (event) {
+    //become true when pressed
     if (event.key === "ArrowRight") {
         keys.ArrowRight = true;
 
     }
 });
-
+//become false when it's not clicked anymore
 window.addEventListener("keyup", function (event) {
     if (event.key === "ArrowRight") {
         keys.ArrowRight = false;
     }
 })
 
+/**Arrow key left */
 window.addEventListener("keydown", function (event) {
+    //become true when pressed
     if (event.key === "ArrowLeft") {
         keys.ArrowLeft = true;
 
     }
 });
-
+//become false when it's not clicked anymore
 window.addEventListener("keyup", function (event) {
     if (event.key === "ArrowLeft") {
         keys.ArrowLeft = false;
     }
 })
-
+/** Press on "s" to start */
 window.addEventListener("keydown", function (event) {
     if (event.key === "s") {
         started = true;
         document.getElementById("instructions").style.display = "none";
     }
 })
+
 const raycaster = new THREE.Raycaster();
 const mouse = new THREE.Vector2();
 
-
+//Mouse positions
 window.addEventListener("mousemove", function (event) {
     mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
     mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
 })
 
 
-
+/**Mini canvas */
 const miniCanvas = document.getElementById('object');
+//renderer
 const miniRenderer = new THREE.WebGLRenderer({
     canvas: miniCanvas
 
 });
 miniRenderer.setSize(200, 200);
 
+//scene
 const miniScene = new THREE.Scene();
 miniScene.background = new THREE.Color(0x000000);
+//camera
 const miniCamera = new THREE.PerspectiveCamera(45, 1, 0.1, 100);
 miniCamera.position.z = 5;
 
+//light
 const light = new THREE.DirectionalLight(0xffffff, 2);
 light.position.set(1, 1, 2);
 miniScene.add(light, new THREE.AmbientLight(0xffffff, 0.5));
 
-
+//when clicked
 window.addEventListener("click", function () {
+
     const intersects = raycaster.intersectObjects(models, true);
 
+    //panel from html
     let panel = document.getElementById("panel");
 
+    //verifiy if it's touching a model
     if (intersects.length > 0) {
         const target = intersects[0].object.userData.parentModel;
 
         if (target) {
 
             // openPanel(target);
+            //get the text depending on the target
             document.getElementById("panel-title").innerText = target.userData.info.title;
             document.getElementById("description").innerText = target.userData.info.text;
-
+            //display panel
             panel.style.display = "block";
 
 
@@ -320,18 +357,21 @@ window.addEventListener("click", function () {
 })
 
 const clock = new THREE.Clock();
+
 //animation
 window.requestAnimationFrame(animate);
 
 function animate() {
-
+    // if started equal true then make the animation work
     if (started) {
+        //animation for the models
         for (const model of models) {
             model.rotation.y += 0.01
             model.position.x += Math.sin(clock.getElapsedTime()) * 0.1;
             model.position.z += Math.sin(clock.getElapsedTime()) * 0.05 + 0.05;
         }
         // controls.update();
+        //make the spaceship move depending on the arrow clicked
         if (keys.ArrowUp === true) {
             spaceship.scene.position.z += 1;
         }
@@ -344,6 +384,7 @@ function animate() {
         if (keys.ArrowLeft === true) {
             spaceship.scene.position.x += 1;
         }
+
         raycaster.setFromCamera(mouse, camera);
 
         for (let i = 0; i < models.length; i++) {
@@ -355,16 +396,19 @@ function animate() {
             });
         }
 
+        //verify if the mouse is touching a model
         const intersects = raycaster.intersectObjects(models, true)
-
+        //if it's touching
         if (intersects.length > 0) {
             const target = intersects[0].object.userData.parentModel;
 
             if (target) {
+                //make it bigger
                 target.scale.lerp(new THREE.Vector3(2, 2, 2), 0.1);
 
                 target.traverse(function (node) {
                     if (node.isMesh) {
+                        //add like a transparent white to the object
                         node.material.emissive.setHex(0x444444);
                     }
                 })
@@ -372,7 +416,9 @@ function animate() {
         }
 
     }
+
     renderer.render(scene, camera);
+
     if (panel.style.display === "block") {
         miniRenderer.render(miniScene, miniCamera);
     }
