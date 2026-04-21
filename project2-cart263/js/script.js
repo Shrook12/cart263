@@ -11,6 +11,7 @@ const gltfLoader = new GLTFLoader();
 const scene = new THREE.Scene()
 scene.add(new THREE.AxesHelper())
 let models = [];
+let started = false;
 
 
 //add background
@@ -261,7 +262,12 @@ window.addEventListener("keyup", function (event) {
     }
 })
 
-
+window.addEventListener("keydown", function (event) {
+    if (event.key === "s") {
+        started = true;
+        document.getElementById("instructions").style.display = "none";
+    }
+})
 const raycaster = new THREE.Raycaster();
 const mouse = new THREE.Vector2();
 
@@ -288,7 +294,7 @@ miniCamera.position.z = 5;
 const light = new THREE.DirectionalLight(0xffffff, 2);
 light.position.set(1, 1, 2);
 miniScene.add(light, new THREE.AmbientLight(0xffffff, 0.5));
-let previewModel = null;
+
 
 window.addEventListener("click", function () {
     const intersects = raycaster.intersectObjects(models, true);
@@ -299,7 +305,6 @@ window.addEventListener("click", function () {
         const target = intersects[0].object.userData.parentModel;
 
         if (target) {
-
 
             // openPanel(target);
             document.getElementById("panel-title").innerText = target.userData.info.title;
@@ -320,52 +325,53 @@ window.requestAnimationFrame(animate);
 
 function animate() {
 
-    for (const model of models) {
-        model.rotation.y += 0.01
-        model.position.x += Math.sin(clock.getElapsedTime()) * 0.1;
-        model.position.z += Math.sin(clock.getElapsedTime()) * 0.05 + 0.05;
-    }
-    // controls.update();
-    if (keys.ArrowUp === true) {
-        spaceship.scene.position.z += 1;
-    }
-    if (keys.ArrowDown === true) {
-        spaceship.scene.position.z -= 1;
-    }
-    if (keys.ArrowRight === true) {
-        spaceship.scene.position.x -= 1;
-    }
-    if (keys.ArrowLeft === true) {
-        spaceship.scene.position.x += 1;
-    }
-    raycaster.setFromCamera(mouse, camera);
-
-    for (let i = 0; i < models.length; i++) {
-        models[i].scale.lerp(new THREE.Vector3(1, 1, 1), 0.1);
-        models[i].traverse(function (node) {
-            if (node.isMesh) {
-                node.material.emissive.setHex(0x000000);
-            }
-        });
-    }
-
-    const intersects = raycaster.intersectObjects(models, true)
-
-    if (intersects.length > 0) {
-        const target = intersects[0].object.userData.parentModel;
-
-        if (target) {
-            target.scale.lerp(new THREE.Vector3(2, 2, 2), 0.1);
-
-            target.traverse(function (node) {
-                if (node.isMesh) {
-                    node.material.emissive.setHex(0x444444);
-                }
-            })
+    if (started) {
+        for (const model of models) {
+            model.rotation.y += 0.01
+            model.position.x += Math.sin(clock.getElapsedTime()) * 0.1;
+            model.position.z += Math.sin(clock.getElapsedTime()) * 0.05 + 0.05;
         }
+        // controls.update();
+        if (keys.ArrowUp === true) {
+            spaceship.scene.position.z += 1;
+        }
+        if (keys.ArrowDown === true) {
+            spaceship.scene.position.z -= 1;
+        }
+        if (keys.ArrowRight === true) {
+            spaceship.scene.position.x -= 1;
+        }
+        if (keys.ArrowLeft === true) {
+            spaceship.scene.position.x += 1;
+        }
+        raycaster.setFromCamera(mouse, camera);
+
+        for (let i = 0; i < models.length; i++) {
+            models[i].scale.lerp(new THREE.Vector3(1, 1, 1), 0.1);
+            models[i].traverse(function (node) {
+                if (node.isMesh) {
+                    node.material.emissive.setHex(0x000000);
+                }
+            });
+        }
+
+        const intersects = raycaster.intersectObjects(models, true)
+
+        if (intersects.length > 0) {
+            const target = intersects[0].object.userData.parentModel;
+
+            if (target) {
+                target.scale.lerp(new THREE.Vector3(2, 2, 2), 0.1);
+
+                target.traverse(function (node) {
+                    if (node.isMesh) {
+                        node.material.emissive.setHex(0x444444);
+                    }
+                })
+            }
+        }
+
     }
-
-
     renderer.render(scene, camera);
     if (panel.style.display === "block") {
         miniRenderer.render(miniScene, miniCamera);
