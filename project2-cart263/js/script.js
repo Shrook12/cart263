@@ -1,5 +1,5 @@
 import * as THREE from "three";
-//import { OrbitControls } from "three/addons/controls/OrbitControls.js"
+import { OrbitControls } from "three/addons/controls/OrbitControls.js"
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js"
 import { TextGeometry } from 'three/addons/geometries/TextGeometry.js';
 import { FontLoader } from 'three/addons/loaders/FontLoader.js';
@@ -37,6 +37,7 @@ scene.fog = new THREE.FogExp2(0x120021, 0.005);
 const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight)
 scene.add(camera)
 camera.position.set(0, 2, 3)
+camera.layers.enable(0);
 
 //access the canvas
 const canvas = document.querySelector("canvas#three-ex")
@@ -55,16 +56,18 @@ window.addEventListener("resize", function () {
     renderer.setSize(window.innerWidth, innerHeight)
 })
 
-//controls
-//const controls = new OrbitControls(camera, canvas)
-
 //light
 const ambientLight = new THREE.AmbientLight()
 scene.add(ambientLight)
 
-ambientLight.color = new THREE.Color(0xff0000)
+ambientLight.color = new THREE.Color(0xffffff)
 ambientLight.intensity = .5;
+ambientLight.layers.enable(1);
 
+const directionalLight = new THREE.DirectionalLight(0xffffff, 2.0);
+directionalLight.position.set(5, 10, 7);
+scene.add(directionalLight);
+directionalLight.layers.enable(1);
 //add 3d text
 //load font
 const loaderfont = new FontLoader();
@@ -132,6 +135,7 @@ try {
     creature = await gltfLoader.loadAsync("./models/creature.glb");
 
 
+
     spaceship.scene.rotation.x = 0;
     spaceship.scene.rotation.y = Math.PI;
     scene.add(spaceship.scene);
@@ -154,6 +158,7 @@ try {
             //verify that the object is a mesh
             if (child.isMesh) {
                 child.userData.parentModel = model;
+                child.layers.enable(1);
             }
         });
         scene.add(model);
@@ -322,11 +327,17 @@ miniScene.background = new THREE.Color(0x000000);
 //camera
 const miniCamera = new THREE.PerspectiveCamera(45, 1, 0.1, 100);
 miniCamera.position.z = 5;
+miniCamera.layers.set(1);
+miniRenderer.render(scene, miniCamera);
 
 //light
 const light = new THREE.DirectionalLight(0xffffff, 2);
 light.position.set(1, 1, 2);
 miniScene.add(light, new THREE.AmbientLight(0xffffff, 0.5));
+
+//controls
+const controls = new OrbitControls(miniCamera, miniCanvas);
+controls.enableDamping = true;
 
 //when clicked
 window.addEventListener("click", function () {
@@ -341,7 +352,11 @@ window.addEventListener("click", function () {
         const target = intersects[0].object.userData.parentModel;
 
         if (target) {
+            const offset = new THREE.Vector3(0, 0, 5);
+            miniCamera.position.copy(target.position).add(offset);
 
+            controls.target.copy(target.position);
+            controls.update();
             // openPanel(target);
             //get the text depending on the target
             document.getElementById("panel-title").innerText = target.userData.info.title;
@@ -365,10 +380,12 @@ function animate() {
     // if started equal true then make the animation work
     if (started) {
         //animation for the models
-        for (const model of models) {
-            model.rotation.y += 0.01
-            model.position.x += Math.sin(clock.getElapsedTime()) * 0.1;
-            model.position.z += Math.sin(clock.getElapsedTime()) * 0.05 + 0.05;
+        if (panel.style.display !== "block") {
+            for (const model of models) {
+                model.rotation.y += 0.01
+                model.position.x += Math.sin(clock.getElapsedTime()) * 0.1;
+                model.position.z += Math.sin(clock.getElapsedTime()) * 0.05 + 0.05;
+            }
         }
         // controls.update();
         //make the spaceship move depending on the arrow clicked
@@ -420,7 +437,7 @@ function animate() {
     renderer.render(scene, camera);
 
     if (panel.style.display === "block") {
-        miniRenderer.render(miniScene, miniCamera);
+        miniRenderer.render(scene, miniCamera);
     }
     window.requestAnimationFrame(animate);
 }
