@@ -9,7 +9,7 @@ const gltfLoader = new GLTFLoader();
 
 //scene
 const scene = new THREE.Scene()
-scene.add(new THREE.AxesHelper())
+//scene.add(new THREE.AxesHelper())
 let models = [];
 let started = false;
 
@@ -74,7 +74,7 @@ const loaderfont = new FontLoader();
 const font = await loaderfont.loadAsync('./fonts/creepster_regular.json');
 
 
-const geometry1 = new TextGeometry('WECLOME TO THE PORTAL', {
+const geometry1 = new TextGeometry('WELCOME TO', {
     font: font,
     size: 4,
     depth: 3
@@ -88,10 +88,10 @@ mesh1.rotation.y = Math.PI;
 //text position
 mesh1.position.y = 6;
 mesh1.position.z = 40;
-mesh1.position.x = 20;
+mesh1.position.x = 10;
 
 
-const geometry2 = new TextGeometry('OF WEIRD OBJECTS', {
+const geometry2 = new TextGeometry('INFINITE MYSTERIES', {
     font: font,
     size: 4,
     depth: 3
@@ -104,7 +104,8 @@ const mesh2 = new THREE.Mesh(geometry2, material2);
 mesh2.rotation.y = Math.PI;
 //text position
 mesh2.position.y = 2;
-mesh2.position.z = 50;
+mesh2.position.z = 60;
+mesh2.position.x = 10;
 
 scene.add(mesh1, mesh2);
 
@@ -165,14 +166,14 @@ try {
 
         //this is for text section
         const legend = {
-            tree: { title: "THE ABNORMAL TREE", text: "This is an abnormal tree that grew up in another universe(it's what scientists believe). After the biggest failure ever of creating a machine to travel through different universes. Someone tried to travel with it and we found this tree after and the person never came back again. Many people believe that the personne was actually transformed into this tree and other believes that they changed place he went to another universe and the tree came here instead " },
-            metal: { title: "THE HISTORIC METAL", text: "" },
-            cube: { title: "", text: "" },
-            monster: { title: "", text: "" },
-            spike: { title: "THE DELICIOUS CANDY", text: "In 19380, 1000 years ago, was invented this candy. I was a huge trend at this time and it was called: The Venus Candy. Why because it was invented in Venus in the north pole by an alien Mr.Cactus. He was a popular chef and this was his most popular food. I was a trend for 5 years but then everyone forgot about it as if it was never created and now 10 years later did not exist anymore. Even though it didn't really taste good and you would probably suffer of blood loss and a destroyed mouth after eating this. Millions of people just bought for trend and to be popular on social media." },
-            screw: { title: "", text: "" },
-            chair: { title: "THE MOST EXPENSIVE CHAIR", text: "In the year 19880, 500 years ago, this chair was a really popular chair. It was and still seen as the most confortable chair ever and good for back posture. Made with high quality it was sold with 2 000 000 000$ to Cantaloupe LeGrand." },
-            creature: { title: "THE ALIEN PENGUIN", text: "This is named an alien penguin. It's an alien from Jupite. It became sort of a legend used in story after it disappearence because alien pollution. " }
+            tree: { title: "THE ABNORMAL TREE", text: "This is an abnormal tree that grew up in another universe(it's what scientists believe). After the biggest failure ever of creating a machine to travel through different universes. Someone tried to travel with it, and we found this tree after, and the person never came back again. Many people believe that the person was actually transformed into this tree, and other believes that they changed places, he went to another universe, and the tree came here instead." },
+            metal: { title: "THE HISTORIC SPACE METAL", text: "The Historic Space Metal was found floating around a forgotten planet. People say it comes from the very first spaceship ever made 100000 years ago by a lost civilization. The metal is so strong that nothing can break it. Sometimes the metal makes soft, musical sounds during storms. Some people think it might be haunted metal. Some people say it might also be haunted by a virus that would explain the shape and would explain why when something get close to it become sick immediately." },
+            cube: { title: "THE FUTURE OF STM TRAIN", text: "With some advanced technologies in the year 20200, this is how the STM train will look like. The STM became like a cube, constantly moving and stopping at every station. There are places to sit everywhere in there. After a couple of years, they found it was dangerous, and people died, so they threw it in this place and become a historical object." },
+            monster: { title: "ORBKIN CREATURE", text: "Nobody really knows where this creature came from, but explorers say it loves to eat ice cream and it has the capacity of doing complex gymnastics even if it has small arms and legs. When it's happy, it has the ability to spin around itself for 20 minutes." },
+            spike: { title: "THE DANGEROUS CANDY", text: "In 19380, 1000 years ago, this candy was invented. I was a huge trend at this time, and it was called: The Venus Candy. Why, because it was invented in Venus at the north pole by an alien Mr.Cactus. He was a popular chef, and this was his most popular food. I was a trend for 5 years, but then everyone forgot about it as if it had never existed, and now 10 years later did not exist anymore. Even though it didn't really taste good, you would probably suffer from blood loss and a destroyed mouth after eating this. Millions of people just bought it for the trend and to be popular on social media." },
+            screw: { title: "SCREW FOR INVISIBLE WALLS", text: "In 19990, someone created an invisible wall. It was there but invisible. It was like magic. With some advanced scientific invisible chemical liquid, it would solidify after a couple of minutes. It was necessary to create a screw that would go with this. This screw is visible, but when put it on an invisible wall, it takes on the same properties as this wall and become invisible." },
+            chair: { title: "THE MOST EXPENSIVE CHAIR", text: "In the year 19880, 500 years ago, this chair was a really popular chair. It was and still is seen as the most confortable chair ever and good for back posture. Made with high quality, it was sold with 2 000 000 000$ to Cantaloupe(a popular businessman)." },
+            creature: { title: "THE ALIEN PENGUIN", text: "This is named an alien penguin. It's an alien from Jupiter. It became sort of a legend used in stories after it disappearence because of alien pollution. " }
 
         }
 
