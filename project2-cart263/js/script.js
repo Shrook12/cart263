@@ -56,6 +56,7 @@ window.addEventListener("resize", function () {
     renderer.setSize(window.innerWidth, innerHeight)
 })
 
+//to add audio
 const audio = new THREE.AudioListener();
 camera.add(audio);
 
