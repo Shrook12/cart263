@@ -56,6 +56,18 @@ window.addEventListener("resize", function () {
     renderer.setSize(window.innerWidth, innerHeight)
 })
 
+const audio = new THREE.AudioListener();
+camera.add(audio);
+
+const sound = new THREE.Audio(audio);
+const audioLoader = new THREE.AudioLoader();
+audioLoader.load("./sound/sound.mp3", function (buffer) {
+    sound.setBuffer(buffer);
+    sound.setLoop(true);
+    sound.setVolume(0.1);
+    sound.play();
+})
+
 //light
 const ambientLight = new THREE.AmbientLight()
 scene.add(ambientLight)
